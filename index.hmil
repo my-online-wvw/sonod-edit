@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>উত্তরাকার সনদ - ১নং গণপদ্দী ইউনিয়ন পরিষদ</title>
+        <style>
+        body {
+            font-family: 'SolaimanLipi', Arial, sans-serif;
+            background-color: #555;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 210mm;
+            min-height: 297mm;
+            background: #fff;
+            margin: 0 auto;
+            padding: 15mm 20mm;
+            box-sizing: border-box;
+            position: relative;
+            border: 2px solid #000;
+            outline: 6px double #000;
+            outline-offset: -8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        body.edit-mode [contenteditable="true"] {
+            outline: 1px dashed #007bff;
+            background-color: #f9f9f9;
+            cursor: text;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .logo-placeholder {
+            width: 70px;
+            height: 70px;
+            border: 1px dashed #000;
+            margin: 0 auto 8px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #555;
+            background: #f9f9f9;
+        }
+        .header h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header p {
+            margin: 6px 0 0 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .sub-header {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .sub-header h3 {
+            margin: 0;
+            font-size: 18px;
+            text-decoration: underline;
+            display: inline-block;
+        }
+        .meta-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .body-text {
+            font-size: 13px;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin: 10px 0;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        th, td {
+            padding: 6px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer-text {
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 10px;
+            text-align: justify;
+        }
+        .warning-text {
+            font-size: 12px;
+            line-height: 1.6;
+            margin-top: 10px;
+            text-align: justify;
+        }
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 20px;
+            padding-bottom: 5px;
+        }
+        .qr-code {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            text-align: center;
+            background: #eee;
+        }
+        .chairman-sign {
+            text-align: right;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .controls button {
+            background: #0b6b3a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+        .controls button.save-btn {
+            background: #007bff;
+            display: none;
+        }
+        body.edit-mode .controls button.save-btn {
+            display: inline-block;
+        }
+        .action-cell {
+            display: none;
+        }
+        body.edit-mode .action-cell {
+            display: table-cell;
+        }
+        .add-row-btn {
+            display: none;
+            margin: 5px 0;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+        body.edit-mode .add-row-btn {
+            display: inline-block;
+        }
+        .del-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 1px 4px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 9px;
+        }
+
+        @media print {
+            .controls, .action-cell, .add-row-btn, .del-btn {
+                display: none !important;
+            }
+            body {
+                background: #fff;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 10mm;
+                border: 2px solid #000;
+                outline: 6px double #000;
+                outline-offset: -8px;
+            }
+        }
+    </style>
+      </head>
+      <body>
+        <div class="controls">
+          <button onclick="toggleEditMode()">🔐 এডিট মোড চালু করুন</button>
+          <button class="save-btn" onclick="saveChanges()">💾 সেভ করুন</button>
+          <button onclick="window.print()">🖨️ প্রিন্ট / ডাউনলোড</button>
+        </div>
+        <div class="container" id="receipt-container">
+          <div>
+            <div class="header">
+              <div class="logo-placeholder">লোগো</div>
+              <h2>
+                <span contenteditable="false">১নং গণপদ্দী ইউনিয়ন পরিষদ কার্যালয়</span>
+              </h2>
+              <p>
+                <span contenteditable="false">নকলা, শেরপুর।</span>
+              </p>
+            </div>
+            <div class="sub-header">
+              <h3>
+                <span contenteditable="false">উত্তরাধিকার সনদ</span>
+              </h3>
+            </div>
+            <div class="meta-info">
+              <div>সনদ নং:- <span contenteditable="false">৩৫৮৬৮৪০৮৮৬৭৪</span>
+            </div>
+            <div>ইস্যুর তারিখ:- <span contenteditable="false">২৩ই জুন ২০২৫</span>
+          </div>
+        </div>
+        <div class="body-text" contenteditable="false">
+          এই মর্মে প্রত্যয়ন করা যাইতেছে যে, মৃত- <b>চান মামুদ ফকির</b>, পিতা/স্বামীঃ মৃত- <b>ভজ্জর উদ্দিন</b>, সে অত্র এলাকার একজন স্থায়ী বাসিন্দা ছিল। তাহার স্থায়ী ঠিকানাঃ- গ্রাম/বাড়ীঃ গজারিয়া, ওয়ার্ড নং-০৬, ডাকঘরঃ গণপদ্দী-২১৫১, ০১ গণপদ্দী ইউনিয়ন, থানা/উপজেলাঃ নকলা, জেলাঃ শেরপুর। বর্তমান ঠিকানাঃ- গ্রাম/বাড়ীঃ গজারিয়া, ওয়ার্ড নং-০৬, ডাকঘরঃ গণপদ্দী-২১৫১, ০১ গণপদ্দী ইউনিয়ন, থানা/উপজেলাঃ নকলা, জেলাঃ শেরপুর। তিনি <b>২৫-১০-১৯৯০</b> তারিখে মৃত্যুবরণ করেন। মৃত্যুকালে তিনি তাহার নিম্ন বর্ণিত উত্তরাধিকারগণ রাখিয়া মৃত্যুবরণ করিয়াছেন।
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ক্রমিক নং</th>
+              <th>নাম</th>
+              <th>জন্ম তারিখ</th>
+              <th>বয়স</th>
+              <th>সম্পর্ক</th>
+              <th class="action-cell">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="heir-tbody">
+            <tr>
+              <td contenteditable="false">১</td>
+              <td contenteditable="false">মোছাঃ সেফালী বেগম</td>
+              <td contenteditable="false">--</td>
+              <td contenteditable="false">--</td>
+              <td contenteditable="false">মেয়ে</td>
+              <td class="action-cell">
+                <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+              </td>
+            </tr>
+            <tr>
+              <td contenteditable="false">২</td>
+              <td contenteditable="false">মোছাঃ নাজমা খাতুন</td>
+              <td contenteditable="false">--</td>
+              <td contenteditable="false">--</td>
+              <td contenteditable="false">মেয়ে</td>
+              <td class="action-cell">
+                <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+              </td>
+            </tr>
+            <tr>
+              <td contenteditable="false">৩</td>
+              <td contenteditable="false">মোঃ সমির উদ্দিন</td>
+              <td contenteditable="false">--</td>
+              <td contenteditable="false">--</td>
+              <td contenteditable="false">ছেলে</td>
+              <td class="action-cell">
+                <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+              </td>
+            </tr>
+            <tr>
+              <td contenteditable="false">৪</td>
+              <td contenteditable="false">মোঃ মনর উদ্দিন</td>
+              <td contenteditable="false">--</td>
+              <td contenteditable="false">--</td>
+              <td contenteditable="false">ছেলে</td>
+              <td class="action-cell">
+                <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+              </td>
+            </tr>
+            <tr>
+              <td contenteditable="false">৫</td>
+              <td contenteditable="false">মৃত- সমলা খাতুন</td>
+              <td contenteditable="false">--</td>
+              <td contenteditable="false">--</td>
+              <td contenteditable="false">স্ত্রী</td>
+              <td class="action-cell">
+                <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="add-row-btn" onclick="addRow()">＋ উত্তরাধিকারী যোগ করুন</button>
+        <div class="footer-text" contenteditable="false">
+          उল্লিখিত ব্যক্তি/ব্যক্তিগণ ছাড়া মৃত ব্যক্তির আর কোনো উত্তরাধিকার নাই। সকল প্রকার দেনাপাওনা/সম্পত্তি/বিষয় নিস্পত্তি করার ব্যাপারে কেবলমাত্র উল্লেখিত ব্যক্তি/ব্যক্তিগণই উত্তরাধিকারী বিবেচিত হইবেন।
+        </div>
+        <div class="footer-text" contenteditable="false">
+          আমি মরহমের আত্মার শান্তি ও উত্তরাধিকারীগণের মঙ্গল কামনা করিতেছি।
+        </div>
+        <div class="warning-text" contenteditable="false">
+          <b>বিঃদ্রঃ</b> আবেদনকারী যদি ইচ্ছাকৃতভাবে কোনো উত্তরাধিকার বাদ দিয়ে থাকেন বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য ১নং গণপদ্দী ইউনিয়ন পরিষদ কার্যালয় কোন ভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল বলিয়া গণ্য করা হইবে।
+        </div>
+      </div>
+      <div class="signature-section">
+        <div class="qr-code">
+          [QR Code]
+        </div>
+        <div class="chairman-sign" contenteditable="false">
+          <b>মোঃ শামছুর রহমান</b>
+          <br>
+            চেয়ারম্যান<br>
+            ১নং গণপদ্দী ইউনিয়ন পরিষদ<br>
+            নকলা, শেরপুর।
+          </div>
+        </div>
+      </div>
+      <script>
+    function loadSavedData() {
+        let savedHTML = localStorage.getItem('successionCertificate_v6');
+        if (savedHTML) {
+            document.getElementById('receipt-container').innerHTML = savedHTML;
+        }
+    }
+
+    function toggleEditMode() {
+        let container = document.getElementById('receipt-container');
+        let editables = container.querySelectorAll('h2 span, h3 span, p span, span, th, td, .body-text, .footer-text, .warning-text, .chairman-sign');
+
+        if (!document.body.classList.contains('edit-mode')) {
+            let pass = prompt("অ্যাডমিন পাসওয়ার্ড দিন: (ডিফল্ট: 1234)");
+            if (pass === "1234") {
+                document.body.classList.add('edit-mode');
+                editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+                alert("এডিট মোড চালু হয়েছে। এখন লেখা এডিট এবং Ctrl+B চেপে বোল্ড বা সাধারণ করতে পারবেন।");
+            } else if (pass !== null) {
+                alert("ভুল পাসওয়ার্ড!");
+            }
+        } else {
+            document.body.classList.remove('edit-mode');
+            editables.forEach(el => el.setAttribute('contenteditable', 'false'));
+        }
+    }
+
+    function addRow() {
+        let tbody = document.getElementById('heir-tbody');
+        let newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td contenteditable="true">-</td>
+            <td contenteditable="true">নাম লিখুন</td>
+            <td contenteditable="true">--</td>
+            <td contenteditable="true">--</td>
+            <td contenteditable="true">সম্পর্ক</td>
+            <td class="action-cell"><button class="del-btn" onclick="deleteRow(this)">ডিলিট</button></td>
+        `;
+        tbody.appendChild(newRow);
+    }
+
+    function deleteRow(btn) {
+        let row = btn.closest('tr');
+        row.remove();
+    }
+
+    function saveChanges() {
+        let container = document.getElementById('receipt-container');
+        let editables = container.querySelectorAll('h2 span, h3 span, p span, span, th, td, .body-text, .footer-text, .warning-text, .chairman-sign');
+        editables.forEach(el => el.setAttribute('contenteditable', 'false'));
+
+        localStorage.setItem('successionCertificate_v6', container.innerHTML);
+        
+        document.body.classList.remove('edit-mode');
+        alert("সফলভাবে সেভ করা হয়েছে!");
+        loadSavedData();
+    }
+
+    window.onload = loadSavedData;
+</script>
+    </body>
+  </html>
