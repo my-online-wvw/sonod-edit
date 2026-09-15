@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ওয়ারিশ সনদ - ৯নং চন্দ্রকোনা ইউনিয়ন পরিষদ</title>
+        <title>ওয়ারিশ সনদ - ৯নং চন্দ্রকোনা ইউনিয়ন পরিষদ</title>
         <style>
         body {
             font-family: 'SolaimanLipi', Arial, sans-serif;
@@ -11,6 +11,75 @@
             margin: 0;
             padding: 5px;
         }
+
+        /* একদম উপরে ফিক্সড কন্ট্রোল বার ও টুলবার এক লাইনে রাখার জন্য */
+        .top-bar-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #333;
+            padding: 8px 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            max-width: 210mm;
+            margin-left: auto;
+            margin-right: auto;
+            box-sizing: border-box;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .controls {
+            display: flex;
+            gap: 5px;
+        }
+        .controls button {
+            background: #0b6b3a;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .controls button.save-btn, .controls button.reset-btn {
+            display: none;
+        }
+        body.edit-mode .controls button.edit-trigger-btn {
+            display: none;
+        }
+        body.edit-mode .controls button.save-btn,
+        body.edit-mode .controls button.reset-btn {
+            display: inline-block;
+        }
+        .controls button.reset-btn {
+            background: #d9534f;
+        }
+
+        /* ফরম্যাটিং টুলবার ডিজাইন (একই লাইনে থাকবে) */
+        .format-toolbar {
+            display: none;
+            gap: 4px;
+            align-items: center;
+        }
+        body.edit-mode .format-toolbar {
+            display: flex;
+        }
+        .format-toolbar button {
+            background: #fff;
+            color: #333;
+            border: none;
+            padding: 5px 10px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .format-toolbar button:hover {
+            background: #ddd;
+        }
+
         .container {
             width: 210mm;
             height: 297mm;
@@ -147,27 +216,7 @@
             margin-top: 4px;
             color: #333;
         }
-        .controls {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .controls button {
-            background: #0b6b3a;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin: 0 5px;
-        }
-        .controls button.save-btn {
-            background: #007bff;
-            display: none;
-        }
-        body.edit-mode .controls button.save-btn {
-            display: inline-block;
-        }
+
         .action-cell {
             display: none;
         }
@@ -255,7 +304,7 @@
         .btn-cancel { background: #dc3545; color: white; }
 
         @media print {
-            .controls, .action-cell, .table-controls, .del-btn, .del-col-btn, .add-row-btn, .modal-overlay {
+            .top-bar-wrapper, .action-cell, .table-controls, .del-btn, .del-col-btn, .add-row-btn, .modal-overlay {
                 display: none !important;
             }
             body {
@@ -274,10 +323,26 @@
     </style>
       </head>
       <body>
-        <div class="controls">
-          <button onclick="openPasswordModal()">🔐 এডিট মোড চালু করুন</button>
-          <button class="save-btn" onclick="saveChanges()">💾 সেভ করুন</button>
-          <button onclick="window.print()">🖨️ প্রিন্ট / ডাউনলোড</button>
+        <!-- একদম উপরে একই লাইনে কন্ট্রোল বাটন ও ফরম্যাটিং টুলবার -->
+        <div class="top-bar-wrapper">
+          <div class="controls">
+            <button class="edit-trigger-btn" onclick="openPasswordModal()">🔐 এডিট মোড</button>
+            <button class="save-btn" onclick="saveChanges()">💾 সেভ করুন</button>
+            <button class="reset-btn" onclick="resetToDefault()">🔄 আগের অবস্থা (রিসেট)</button>
+            <button onclick="window.print()">🖨️ প্রিন্ট</button>
+          </div>
+          <!-- লেখা সিলেক্ট করে বোল্ড, ইটালিক ও ছোট-বড় করার টুলবার -->
+          <div class="format-toolbar">
+            <button onclick="formatText('bold')" title="বোল্ড করুন">
+              <b>B</b>
+            </button>
+            <button onclick="formatText('italic')" title="বাঁকা করুন">
+              <i>I</i>
+            </button>
+            <button onclick="formatText('undo')" title="আগের ধাপে ফিরে যান (Undo)">↩️</button>
+            <button onclick="changeFontSize('increase')" title="লেখা বড় করুন">A+</button>
+            <button onclick="changeFontSize('decrease')" title="লেখা ছোট করুন">A-</button>
+          </div>
         </div>
         <!-- পাসওয়ার্ড ইনপুট পপআপ -->
         <div class="modal-overlay" id="passwordModal">
@@ -298,7 +363,7 @@
                   <div class="header-center">
                     <div class="top-center-logo">সরকারি লোগো</div>
                     <h2>
-                      <span contenteditable="false">৯নং চন্দ্রকোনা ইউনিয়ন পরিষদ</span>
+                      <span contenteditable="false">৯নং চন্দ্রকোনা ইউনিয়ন পরিষদ</span>
                     </h2>
                     <p>
                       <span contenteditable="false">নকলা, শেরপুর।</span>
@@ -312,7 +377,7 @@
                 </div>
                 <div class="certificate-title-box">
                   <h3>
-                    <span contenteditable="false">ওয়ারিশ সনদ</span>
+                    <span contenteditable="false">ওয়ারিশ সনদ</span>
                   </h3>
                 </div>
                 <div class="meta-info">
@@ -322,7 +387,7 @@
               </div>
             </div>
             <div class="body-text" contenteditable="false">
-              এই মর্মে ওয়ারিশ সনদ প্রদান করা যাচ্ছে যে, মৃত- <b>কছিম উদ্দিন</b>, পিতাঃ মৃত- আমির সেখ, ওয়ার্ড নাম্বার- <b>৪</b>, গ্রামঃ বালিয়াদি, ডাকঘরঃ চন্দ্রকোনা-২১৫১, থানাঃ নকলা, উপজেলাঃ নকলা, জেলাঃ শেরপুর মৃত্যুকালে তিনি নিম্নলিখিত ওয়ারিশগণকে রেখে যান।
+              এই মর্মে ওয়ারিশ সনদ প্রদান করা যাচ্ছে যে, মৃত- <b>কছিম উদ্দিন</b>, পিতাঃ মৃত- আমির সেখ, ওয়ার্ড নাম্বার- <b>৪</b>, গ্রামঃ বালিয়াদি, ডাকঘরঃ চন্দ্রকোনা-২১৫১, থানাঃ নকলা, উপজেলাঃ নকলা, জেলাঃ শেরপুর মৃত্যুকালে তিনি নিম্নলিখিত ওয়ারিশগণকে রেখে যান।
             </div>
             <!-- টেবিল কলাম কন্ট্রোল -->
             <div class="table-controls">
@@ -334,7 +399,7 @@
                   <th contenteditable="false">ক্রমিক</th>
                   <th contenteditable="false">নাম</th>
                   <th contenteditable="false">জন্ম তারিখ</th>
-                  <th contenteditable="false">বয়স</th>
+                  <th contenteditable="false">বয়স</th>
                   <th contenteditable="false">সম্পর্ক</th>
                   <th class="action-cell">অ্যাকশন</th>
                 </tr>
@@ -362,12 +427,12 @@
                 </tr>
               </tbody>
             </table>
-            <button class="add-row-btn" onclick="addRow()">＋ ওয়ারিশ যোগ করুন</button>
+            <button class="add-row-btn" onclick="addRow()">＋ ওয়ারিশ যোগ করুন</button>
             <div class="notice-section" contenteditable="false">
-              সংশ্লিষ্ট <b>০৪ নং</b> ওয়ার্ড সদস্যের যাচাইয়ের ভিত্তিতে ওয়ারিশ সনদ ইস্যু করা হলো।
+              সংশ্লিষ্ট <b>০৪ নং</b> ওয়ার্ড সদস্যের যাচাইয়ের ভিত্তিতে ওয়ারিশ সনদ ইস্যু করা হলো।
             </div>
             <div class="notice-section" contenteditable="false">
-              <b>মন্তব্যঃ</b> বিঃদ্রঃ আবেদনকারী যদি ইচ্ছাকৃতভাবে কোন উত্তরাধিকার বাদ দিয়ে থাকেন, বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য কর্তৃপক্ষ কোনভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল গন্য করা হইবে।
+              <b>মন্তব্যঃ</b> বিঃদ্রঃ আবেদনকারী যদি ইচ্ছাকৃতভাবে কোন উত্তরাধিকার বাদ দিয়ে থাকেন, বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য কর্তৃপক্ষ কোনভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল গন্য করা হইবে।
             </div>
           </div>
           <div class="signature-area">
@@ -379,8 +444,8 @@
                 <span contenteditable="false">
                   <b style="font-size: 12.5px;">মোঃ সুরুজ বাঙ্গালী</b>
                   <br>
-                    প্যানেল চেয়ারম্যান<br>
-                    ৯নং চন্দ্রকোনা ইউনিয়ন পরিষদ<br>
+                    প্যানেল চেয়ারম্যান<br>
+                    ৯নং চন্দ্রকোনা ইউনিয়ন পরিষদ<br>
                     নকলা, শেরপুর।
                   </span>
                 </div>
@@ -388,23 +453,27 @@
                   <span contenteditable="false">
                     <b style="font-size: 12.5px;">মোঃ কামরুজ্জামান</b>
                     <br>
-                      চেয়ারম্যান<br>
-                      ৯নং চন্দ্রকোনা ইউনিয়ন পরিষদ<br>
+                      চেয়ারম্যান<br>
+                      ৯নং চন্দ্রকোনা ইউনিয়ন পরিষদ<br>
                       নকলা, শেরপুর।
                     </span>
                   </div>
                 </div>
                 <div class="footer-verify" contenteditable="false">
                   সনদ যাচাইঃ ভিজিট করুন www.sonodbdf.com অথবা QR স্ক্যান করুন<br>
-                  সফটওয়্যার নির্মাণ, রক্ষণাবেক্ষণঃ সেবা অটোমেশন, পরিবেশনা: বাংলাদেশ কম্পিউটার কাউন্সিল (বিসিসি)
+                  সফটওয়্যার নির্মাণ, রক্ষণাবেক্ষণঃ সেবা অটোমেশন, পরিবেশনা: বাংলাদেশ কম্পিউটার কাউন্সিল (বিসিসি)
                 </div>
               </div>
             </div>
             <script>
     const ADMIN_PASSWORD = "1234";
+    const STORAGE_KEY = 'chandrakona_warish_v19';
+
+    // অরিজিনাল বা ডিফল্ট পেজ লেআউট সংরক্ষণ করে রাখা
+    const defaultTemplateHTML = document.getElementById('receipt-container').innerHTML;
 
     function loadSavedData() {
-        let savedHTML = localStorage.getItem('chandrakona_warish_v12');
+        let savedHTML = localStorage.getItem(STORAGE_KEY);
         if (savedHTML) {
             document.getElementById('receipt-container').innerHTML = savedHTML;
         }
@@ -429,16 +498,56 @@
             document.body.classList.add('edit-mode');
             editables.forEach(el => el.setAttribute('contenteditable', 'true'));
             
-            // এডিট মোডে কলাম ডিলিট করার বাটন হেদারে যোগ করা
             addColDeleteButtons();
-            alert("এডিট মোড চালু হয়েছে। এখন কলামের নাম এডিট করতে পারবেন, নতুন কলাম বা সারি যোগ করতে পারবেন এবং অপ্রয়োজনীয় কলাম ডিলিট করতে পারবেন।");
+            alert("এডিট মোড চালু হয়েছে।");
         } else {
             alert("ভুল পাসওয়ার্ড!");
         }
     }
 
+    // ফরম্যাট ও আনডু করার জন্য
+    function formatText(command) {
+        document.execCommand(command, false, null);
+    }
+
+    // লেখা বারবার ছোট বা বড় করার ফাংশন
+    function changeFontSize(action) {
+        let selection = window.getSelection();
+        if (!selection.rangeCount || selection.isCollapsed) {
+            alert("দয়া করে প্রথমে যে লেখাটি ছোট বা বড় করতে চান তা সিলেক্ট করুন।");
+            return;
+        }
+        
+        let range = selection.getRangeAt(0);
+        let selectedText = range.toString();
+        if(!selectedText) return;
+
+        let containerElement = range.commonAncestorContainer;
+        if (containerElement.nodeType === 3) { 
+            containerElement = containerElement.parentNode;
+        }
+        
+        let currentSize = parseFloat(window.getComputedStyle(containerElement).fontSize);
+        if (!currentSize || isNaN(currentSize)) currentSize = 11.5;
+
+        let newSize = currentSize;
+        if (action === 'increase') {
+            newSize += 1.5;
+        } else if (action === 'decrease') {
+            newSize -= 1.5;
+        }
+
+        let span = document.createElement("span");
+        span.style.fontSize = newSize + 'px';
+        span.appendChild(range.extractContents());
+        range.insertNode(span);
+        
+        selection.removeAllRanges();
+    }
+
     function addColDeleteButtons() {
         let headerRow = document.getElementById('table-header-row');
+        if (!headerRow) return;
         let ths = headerRow.querySelectorAll('th');
         for (let i = 0; i < ths.length - 1; i++) {
             if (!ths[i].querySelector('.del-col-btn')) {
@@ -446,7 +555,7 @@
                 delBtn.className = 'del-col-btn';
                 delBtn.innerText = '✕';
                 delBtn.title = 'এই কলামটি ডিলিট করুন';
-                delBtn.onclick = function() { deleteColumn(i); };
+                delBtn.onclick = function() { deleteColumn(this); };
                 ths[i].appendChild(delBtn);
             }
         }
@@ -459,20 +568,19 @@
         let headerRow = document.getElementById('table-header-row');
         let actionTh = headerRow.lastElementChild;
         
-        // নতুন থি (Header) তৈরি
         let newTh = document.createElement('th');
         newTh.setAttribute('contenteditable', 'true');
         newTh.innerText = colName;
+        
         let delBtn = document.createElement('button');
         delBtn.className = 'del-col-btn';
         delBtn.innerText = '✕';
         delBtn.title = 'এই কলামটি ডিলিট করুন';
-        let colIndex = headerRow.children.length - 1;
-        delBtn.onclick = function() { deleteColumn(colIndex - 1); };
+        delBtn.onclick = function() { deleteColumn(this); };
         newTh.appendChild(delBtn);
+        
         headerRow.insertBefore(newTh, actionTh);
 
-        // সব রো (Row)-তে নতুন সেল যোগ করা
         let tbody = document.getElementById('heir-tbody');
         let rows = tbody.querySelectorAll('tr');
         rows.forEach(row => {
@@ -484,27 +592,32 @@
         });
     }
 
-    function deleteColumn(index) {
+    function deleteColumn(btn) {
+        let th = btn.closest('th');
         let headerRow = document.getElementById('table-header-row');
-        if (headerRow.children.length <= 3) {
+        
+        if (headerRow.children.length <= 2) {
             alert("কমপক্ষে একটি কলাম থাকা আবশ্যক!");
             return;
         }
 
         if (confirm("সত্যিই এই কলামটি মুছে ফেলতে চান?")) {
-            headerRow.children[index].remove();
+            let index = Array.from(headerRow.children).indexOf(th);
+            th.remove();
+
             let tbody = document.getElementById('heir-tbody');
             let rows = tbody.querySelectorAll('tr');
             rows.forEach(row => {
-                row.children[index].remove();
+                if (row.children[index]) {
+                    row.children[index].remove();
+                }
             });
-            // ইনডেক্স রিফ্রেশ করতে আবার এডিট মোড রিলোড বা বাটন আপডেট করা যেতে পারে
         }
     }
 
     function addRow() {
         let headerRow = document.getElementById('table-header-row');
-        let colCount = headerRow.children.length - 1; // অ্যাকশন কলাম বাদ দিয়ে
+        let colCount = headerRow.children.length - 1; 
         
         let tbody = document.getElementById('heir-tbody');
         let newRow = document.createElement('tr');
@@ -526,20 +639,32 @@
 
     function saveChanges() {
         let container = document.getElementById('receipt-container');
-        // সেভ করার সময় কলাম ডিলিট বাটনগুলো সরিয়ে ফেলা হবে
         container.querySelectorAll('.del-col-btn').forEach(btn => btn.remove());
         
         let editables = container.querySelectorAll('h2, h3, p, span, th, td, .body-text, .notice-section, .footer-verify');
         editables.forEach(el => el.setAttribute('contenteditable', 'false'));
 
-        localStorage.setItem('chandrakona_warish_v12', container.innerHTML);
+        localStorage.setItem(STORAGE_KEY, container.innerHTML);
         
         document.body.classList.remove('edit-mode');
-        alert("সফলভাবে সেভ করা হয়েছে!");
+        alert("সফলভাবে সেভ করা হয়েছে!");
         loadSavedData();
     }
 
-    window.onload = function() { document.body.classList.remove("edit-mode"); loadSavedData(); };
+    // একদম আগের বা ডিফল্ট অবস্থায় ফিরে যাওয়ার রিসেট ফাংশন
+    function resetToDefault() {
+        if (confirm("আপনি কি নিশ্চিত যে সমস্ত পরিবর্তন মুছে ফেলে একদম আগের ডিফল্ট অবস্থায় ফিরে যেতে চান?")) {
+            localStorage.removeItem(STORAGE_KEY);
+            document.getElementById('receipt-container').innerHTML = defaultTemplateHTML;
+            document.body.classList.remove('edit-mode');
+            alert("পেজটি আগের অবস্থায় ফিরিয়ে নেওয়া হয়েছে।");
+        }
+    }
+
+    window.onload = function() { 
+        document.body.classList.remove("edit-mode"); 
+        loadSavedData(); 
+    };
 </script>
           </body>
         </html>
