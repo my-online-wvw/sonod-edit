@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="bn">
-  <head>
+<head>
     <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>উত্তরাকার সনদ - ১নং গণপদ্দী ইউনিয়ন পরিষদ</title>
-        <style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>উত্তরাকার সনদ - ১নং গণপদ্দী ইউনিয়ন পরিষদ</title>
+    <style>
         body {
             font-family: 'SolaimanLipi', Arial, sans-serif;
             background-color: #555;
@@ -183,8 +183,45 @@
             font-size: 9px;
         }
 
+        /* গোপন পাসওয়ার্ড পপআপ উইন্ডো স্টাইল */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 280px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .modal-box input {
+            width: 85%;
+            padding: 8px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .modal-box button {
+            padding: 6px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-submit { background: #28a745; color: white; }
+        .btn-cancel { background: #dc3545; color: white; }
+
         @media print {
-            .controls, .action-cell, .add-row-btn, .del-btn {
+            .controls, .action-cell, .add-row-btn, .del-btn, .modal-overlay {
                 display: none !important;
             }
             body {
@@ -200,127 +237,132 @@
             }
         }
     </style>
-      </head>
-      <body>
-        <div class="controls">
-          <button onclick="toggleEditMode()">🔐 এডিট মোড চালু করুন</button>
-          <button class="save-btn" onclick="saveChanges()">💾 সেভ করুন</button>
-          <button onclick="window.print()">🖨️ প্রিন্ট / ডাউনলোড</button>
+</head>
+<body>
+
+<div class="controls">
+    <button onclick="openPasswordModal()">🔐 এডিট মোড চালু করুন</button>
+    <button class="save-btn" onclick="saveChanges()">💾 সেভ করুন</button>
+    <button onclick="window.print()">🖨️ প্রিন্ট / ডাউনলোড</button>
+</div>
+
+<!-- পাসওয়ার্ড ইনপুট পপআপ উইন্ডো (লুকানো মোডে থাকবে) -->
+<div class="modal-overlay" id="passwordModal">
+    <div class="modal-box">
+        <h4>অ্যাডমিন পাসওয়ার্ড দিন</h4>
+        <input type="password" id="adminPasswordInput" placeholder="পাসওয়ার্ড দিন">
+        <br>
+        <button class="btn-submit" onclick="verifyPassword()">প্রবেশ করুন</button>
+        <button class="btn-cancel" onclick="closePasswordModal()">বাতিল</button>
+    </div>
+</div>
+
+<div class="container" id="receipt-container">
+    <div>
+        <div class="header">
+            <div class="logo-placeholder">লোগো</div>
+            <h2><span contenteditable="false">১নং গণপদ্দী ইউনিয়ন পরিষদ কার্যালয়</span></h2>
+            <p><span contenteditable="false">নকলা, শেরপুর।</span></p>
         </div>
-        <div class="container" id="receipt-container">
-          <div>
-            <div class="header">
-              <div class="logo-placeholder">লোগো</div>
-              <h2>
-                <span contenteditable="false">১নং গণপদ্দী ইউনিয়ন পরিষদ কার্যালয়</span>
-              </h2>
-              <p>
-                <span contenteditable="false">নকলা, শেরপুর।</span>
-              </p>
-            </div>
-            <div class="sub-header">
-              <h3>
-                <span contenteditable="false">উত্তরাধিকার সনদ</span>
-              </h3>
-            </div>
-            <div class="meta-info">
-              <div>সনদ নং:- <span contenteditable="false">৩৫৮৬৮৪০৮৮৬৭৪</span>
-            </div>
-            <div>ইস্যুর তারিখ:- <span contenteditable="false">২৩ই জুন ২০২৫</span>
-          </div>
+
+        <div class="sub-header">
+            <h3><span contenteditable="false">উত্তরাধিকার সনদ</span></h3>
         </div>
+
+        <div class="meta-info">
+            <div>সনদ নং:- <span contenteditable="false">৩৫৮৬৮৪০৮৮৬৭৪</span></div>
+            <div>ইস্যুর তারিখ:- <span contenteditable="false">২৩ই জুন ২০২৫</span></div>
+        </div>
+
         <div class="body-text" contenteditable="false">
-          এই মর্মে প্রত্যয়ন করা যাইতেছে যে, মৃত- <b>চান মামুদ ফকির</b>, পিতা/স্বামীঃ মৃত- <b>ভজ্জর উদ্দিন</b>, সে অত্র এলাকার একজন স্থায়ী বাসিন্দা ছিল। তাহার স্থায়ী ঠিকানাঃ- গ্রাম/বাড়ীঃ গজারিয়া, ওয়ার্ড নং-০৬, ডাকঘরঃ গণপদ্দী-২১৫১, ০১ গণপদ্দী ইউনিয়ন, থানা/উপজেলাঃ নকলা, জেলাঃ শেরপুর। বর্তমান ঠিকানাঃ- গ্রাম/বাড়ীঃ গজারিয়া, ওয়ার্ড নং-০৬, ডাকঘরঃ গণপদ্দী-২১৫১, ০১ গণপদ্দী ইউনিয়ন, থানা/উপজেলাঃ নকলা, জেলাঃ শেরপুর। তিনি <b>২৫-১০-১৯৯০</b> তারিখে মৃত্যুবরণ করেন। মৃত্যুকালে তিনি তাহার নিম্ন বর্ণিত উত্তরাধিকারগণ রাখিয়া মৃত্যুবরণ করিয়াছেন।
+            এই মর্মে প্রত্যয়ন করা যাইতেছে যে, মৃত- <b>চান মামুদ ফকির</b>, পিতা/স্বামীঃ মৃত- <b>ভজ্জর উদ্দিন</b>, সে অত্র এলাকার একজন স্থায়ী বাসিন্দা ছিল। তাহার স্থায়ী ঠিকানাঃ- গ্রাম/বাড়ীঃ গজারিয়া, ওয়ার্ড নং-০৬, ডাকঘরঃ গণপদ্দী-২১৫১, ০১ গণপদ্দী ইউনিয়ন, থানা/উপজেলাঃ নকলা, জেলাঃ শেরপুর। বর্তমান ঠিকানাঃ- গ্রাম/বাড়ীঃ গজারিয়া, ওয়ার্ড নং-০৬, ডাকঘরঃ গণপদ্দী-২১৫১, ০১ গণপদ্দী ইউনিয়ন, থানা/উপজেলাঃ নকলা, জেলাঃ শেরপুর। তিনি <b>২৫-১০-১৯৯০</b> তারিখে মৃত্যুবরণ করেন। মৃত্যুকালে তিনি তাহার নিম্ন বর্ণিত উত্তরাধিকারগণ রাখিয়া মৃত্যুবরণ করিয়াছেন।
         </div>
+
         <table>
-          <thead>
-            <tr>
-              <th>ক্রমিক নং</th>
-              <th>নাম</th>
-              <th>জন্ম তারিখ</th>
-              <th>বয়স</th>
-              <th>সম্পর্ক</th>
-              <th class="action-cell">অ্যাকশন</th>
-            </tr>
-          </thead>
-          <tbody id="heir-tbody">
-            <tr>
-              <td contenteditable="false">১</td>
-              <td contenteditable="false">মোছাঃ সেফালী বেগম</td>
-              <td contenteditable="false">--</td>
-              <td contenteditable="false">--</td>
-              <td contenteditable="false">মেয়ে</td>
-              <td class="action-cell">
-                <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-              </td>
-            </tr>
-            <tr>
-              <td contenteditable="false">২</td>
-              <td contenteditable="false">মোছাঃ নাজমা খাতুন</td>
-              <td contenteditable="false">--</td>
-              <td contenteditable="false">--</td>
-              <td contenteditable="false">মেয়ে</td>
-              <td class="action-cell">
-                <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-              </td>
-            </tr>
-            <tr>
-              <td contenteditable="false">৩</td>
-              <td contenteditable="false">মোঃ সমির উদ্দিন</td>
-              <td contenteditable="false">--</td>
-              <td contenteditable="false">--</td>
-              <td contenteditable="false">ছেলে</td>
-              <td class="action-cell">
-                <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-              </td>
-            </tr>
-            <tr>
-              <td contenteditable="false">৪</td>
-              <td contenteditable="false">মোঃ মনর উদ্দিন</td>
-              <td contenteditable="false">--</td>
-              <td contenteditable="false">--</td>
-              <td contenteditable="false">ছেলে</td>
-              <td class="action-cell">
-                <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-              </td>
-            </tr>
-            <tr>
-              <td contenteditable="false">৫</td>
-              <td contenteditable="false">মৃত- সমলা খাতুন</td>
-              <td contenteditable="false">--</td>
-              <td contenteditable="false">--</td>
-              <td contenteditable="false">স্ত্রী</td>
-              <td class="action-cell">
-                <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-              </td>
-            </tr>
-          </tbody>
+            <thead>
+                <tr>
+                    <th>ক্রমিক নং</th>
+                    <th>নাম</th>
+                    <th>জন্ম তারিখ</th>
+                    <th>বয়স</th>
+                    <th>সম্পর্ক</th>
+                    <th class="action-cell">অ্যাকশন</th>
+                </tr>
+            </thead>
+            <tbody id="heir-tbody">
+                <tr>
+                    <td contenteditable="false">১</td>
+                    <td contenteditable="false">মোছাঃ সেফালী বেগম</td>
+                    <td contenteditable="false">--</td>
+                    <td contenteditable="false">--</td>
+                    <td contenteditable="false">মেয়ে</td>
+                    <td class="action-cell"><button class="del-btn" onclick="deleteRow(this)">ডিলিট</button></td>
+                </tr>
+                <tr>
+                    <td contenteditable="false">২</td>
+                    <td contenteditable="false">মোছাঃ নাজমা খাতুন</td>
+                    <td contenteditable="false">--</td>
+                    <td contenteditable="false">--</td>
+                    <td contenteditable="false">মেয়ে</td>
+                    <td class="action-cell"><button class="del-btn" onclick="deleteRow(this)">ডিলিট</button></td>
+                </tr>
+                <tr>
+                    <td contenteditable="false">৩</td>
+                    <td contenteditable="false">মোঃ সমির উদ্দিন</td>
+                    <td contenteditable="false">--</td>
+                    <td contenteditable="false">--</td>
+                    <td contenteditable="false">ছেলে</td>
+                    <td class="action-cell"><button class="del-btn" onclick="deleteRow(this)">ডিলিট</button></td>
+                </tr>
+                <tr>
+                    <td contenteditable="false">৪</td>
+                    <td contenteditable="false">মোঃ মনর উদ্দিন</td>
+                    <td contenteditable="false">--</td>
+                    <td contenteditable="false">--</td>
+                    <td contenteditable="false">ছেলে</td>
+                    <td class="action-cell"><button class="del-btn" onclick="deleteRow(this)">ডিলিট</button></td>
+                </tr>
+                <tr>
+                    <td contenteditable="false">৫</td>
+                    <td contenteditable="false">মৃত- সমলা খাতুন</td>
+                    <td contenteditable="false">--</td>
+                    <td contenteditable="false">--</td>
+                    <td contenteditable="false">স্ত্রী</td>
+                    <td class="action-cell"><button class="del-btn" onclick="deleteRow(this)">ডিলিট</button></td>
+                </tr>
+            </tbody>
         </table>
         <button class="add-row-btn" onclick="addRow()">＋ উত্তরাধিকারী যোগ করুন</button>
+
         <div class="footer-text" contenteditable="false">
-          उল্লিখিত ব্যক্তি/ব্যক্তিগণ ছাড়া মৃত ব্যক্তির আর কোনো উত্তরাধিকার নাই। সকল প্রকার দেনাপাওনা/সম্পত্তি/বিষয় নিস্পত্তি করার ব্যাপারে কেবলমাত্র উল্লেখিত ব্যক্তি/ব্যক্তিগণই উত্তরাধিকারী বিবেচিত হইবেন।
+            उল্লিখিত ব্যক্তি/ব্যক্তিগণ ছাড়া মৃত ব্যক্তির আর কোনো উত্তরাধিকার নাই। সকল প্রকার দেনাপাওনা/সম্পত্তি/বিষয় নিস্পত্তি করার ব্যাপারে কেবলমাত্র উল্লেখিত ব্যক্তি/ব্যক্তিগণই উত্তরাধিকারী বিবেচিত হইবেন।
         </div>
+
         <div class="footer-text" contenteditable="false">
-          আমি মরহমের আত্মার শান্তি ও উত্তরাধিকারীগণের মঙ্গল কামনা করিতেছি।
+            আমি মরহমের আত্মার শান্তি ও উত্তরাধিকারীগণের মঙ্গল কামনা করিতেছি।
         </div>
+
         <div class="warning-text" contenteditable="false">
-          <b>বিঃদ্রঃ</b> আবেদনকারী যদি ইচ্ছাকৃতভাবে কোনো উত্তরাধিকার বাদ দিয়ে থাকেন বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য ১নং গণপদ্দী ইউনিয়ন পরিষদ কার্যালয় কোন ভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল বলিয়া গণ্য করা হইবে।
+            <b>বিঃদ্রঃ</b> আবেদনকারী যদি ইচ্ছাকৃতভাবে কোনো উত্তরাধিকার বাদ দিয়ে থাকেন বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য ১নং গণপদ্দী ইউনিয়ন পরিষদ কার্যালয় কোন ভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল বলিয়া গণ্য করা হইবে।
         </div>
-      </div>
-      <div class="signature-section">
+    </div>
+
+    <div class="signature-section">
         <div class="qr-code">
-          [QR Code]
+            [QR Code]
         </div>
         <div class="chairman-sign" contenteditable="false">
-          <b>মোঃ শামছুর রহমান</b>
-          <br>
+            <b>মোঃ শামছুর রহমান</b><br>
             চেয়ারম্যান<br>
             ১নং গণপদ্দী ইউনিয়ন পরিষদ<br>
             নকলা, শেরপুর।
-          </div>
         </div>
-      </div>
-      <script>
+    </div>
+</div>
+
+<script>
+    const ADMIN_PASSWORD = "1234";
+
     function loadSavedData() {
         let savedHTML = localStorage.getItem('successionCertificate_v6');
         if (savedHTML) {
@@ -328,22 +370,27 @@
         }
     }
 
-    function toggleEditMode() {
-        let container = document.getElementById('receipt-container');
-        let editables = container.querySelectorAll('h2 span, h3 span, p span, span, th, td, .body-text, .footer-text, .warning-text, .chairman-sign');
+    function openPasswordModal() {
+        document.getElementById('passwordModal').style.display = 'flex';
+        document.getElementById('adminPasswordInput').value = '';
+    }
 
-        if (!document.body.classList.contains('edit-mode')) {
-            let pass = prompt("অ্যাডমিন পাসওয়ার্ড দিন: (ডিফল্ট: 1234)");
-            if (pass === "1234") {
-                document.body.classList.add('edit-mode');
-                editables.forEach(el => el.setAttribute('contenteditable', 'true'));
-                alert("এডিট মোড চালু হয়েছে। এখন লেখা এডিট এবং Ctrl+B চেপে বোল্ড বা সাধারণ করতে পারবেন।");
-            } else if (pass !== null) {
-                alert("ভুল পাসওয়ার্ড!");
-            }
+    function closePasswordModal() {
+        document.getElementById('passwordModal').style.display = 'none';
+    }
+
+    function verifyPassword() {
+        let pass = document.getElementById('adminPasswordInput').value;
+        if (pass === ADMIN_PASSWORD) {
+            closePasswordModal();
+            let container = document.getElementById('receipt-container');
+            let editables = container.querySelectorAll('h2 span, h3 span, p span, span, th, td, .body-text, .footer-text, .warning-text, .chairman-sign');
+
+            document.body.classList.add('edit-mode');
+            editables.forEach(el => el.setAttribute('contenteditable', 'true'));
+            alert("এডিট মোড চালু হয়েছে। এখন লেখা এডিট এবং Ctrl+B চেপে বোল্ড বা সাধারণ করতে পারবেন।");
         } else {
-            document.body.classList.remove('edit-mode');
-            editables.forEach(el => el.setAttribute('contenteditable', 'false'));
+            alert("ভুল পাসওয়ার্ড!");
         }
     }
 
@@ -378,7 +425,8 @@
         loadSavedData();
     }
 
-    window.onload = loadSavedData;
+    window.onload = function() { document.body.classList.remove("edit-mode"); loadSavedData(); };
 </script>
-    </body>
-  </html>
+
+</body>
+</html>
