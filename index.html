@@ -19,7 +19,7 @@
             background: #333;
             padding: 8px 10px;
             border-radius: 6px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
             max-width: 210mm;
             margin-left: auto;
@@ -84,20 +84,20 @@
             max-height: 297mm;
             background: #fff;
             margin: 0 auto;
-            padding: 10mm 12mm;
+            padding: 8mm 10mm;
             box-sizing: border-box;
             position: relative;
-            border: 2px solid #000;
-            outline: 6px double #000;
-            outline-offset: -8px;
+            border: 3px double #000 !important;
+            outline: none;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             overflow: hidden;
         }
+
+        /* এডিট মোডে সব লেখার নিচে হালকা আন্ডারলাইন দেখাবে */
         body.edit-mode [contenteditable="true"] {
-            outline: 1px dashed #007bff;
-            background-color: #f9f9f9;
+            border-bottom: 1.5px dashed #007bff;
             cursor: text;
         }
 
@@ -105,31 +105,20 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 2px;
+            margin-bottom: 6px;
         }
         .top-center-logo {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            margin: 0 auto 2px auto;
+            margin: 0 auto 3px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8px;
+            font-size: 9px;
             background: #f0f0f0;
             text-align: center;
             border: 1px solid #ccc;
-        }
-        .qr-top {
-            width: 55px;
-            height: 55px;
-            border: 1px solid #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8px;
-            text-align: center;
-            background: #fff;
         }
         .header-center {
             text-align: center;
@@ -138,22 +127,22 @@
         }
         .header-center h2 {
             margin: 0;
-            font-size: 20px;
+            font-size: 21px;
             font-weight: bold;
         }
         .header-center p {
-            margin: 1px 0;
-            font-size: 11px;
+            margin: 3px 0;
+            font-size: 12.5px;
         }
 
         .certificate-title-box {
             text-align: center;
-            margin: 6px 0 6px 0;
+            margin: 6px 0;
         }
         .certificate-title-box h3 {
             display: inline-block;
             margin: 0;
-            font-size: 16px;
+            font-size: 17px;
             font-weight: bold;
             background: #fff;
         }
@@ -161,13 +150,13 @@
         .meta-info {
             display: flex;
             justify-content: space-between;
-            font-size: 11.5px;
+            font-size: 13px;
             margin-bottom: 8px;
             font-weight: bold;
         }
         .body-text {
-            font-size: 11.5px;
-            line-height: 1.5;
+            font-size: 13px;
+            line-height: 1.6;
             text-align: justify;
             margin-bottom: 8px;
         }
@@ -176,27 +165,27 @@
             width: 100% !important;
             table-layout: fixed;
             border-collapse: collapse;
-            font-size: 11px;
-            margin: 4px 0;
+            font-size: 12px;
+            margin: 6px 0;
         }
         table, th, td {
             border: 1px solid #000;
         }
         th, td {
-            padding: 3px 4px;
+            padding: 4px 5px;
             text-align: center;
             word-wrap: break-word;
             overflow: hidden;
         }
         th {
             background-color: #fff;
-            font-size: 11.5px;
+            font-size: 12.5px;
         }
 
         .notice-section {
-            font-size: 11px;
-            line-height: 1.45;
-            margin-top: 5px;
+            font-size: 12px;
+            line-height: 1.55;
+            margin-top: 6px;
             text-align: justify;
         }
 
@@ -207,33 +196,49 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
         }
         .sign-box {
             text-align: center;
-            font-size: 11.5px;
-            line-height: 1.4;
+            font-size: 12.5px;
+            line-height: 1.5;
         }
         
-        /* আন্ডারলাইন রিমুভ করা হয়েছে */
-        .footer-verify {
+        .qr-bottom {
+            width: 42px;
+            height: 42px;
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8.5px;
             text-align: center;
-            font-size: 10px;
-            padding-top: 4px;
+            background: #fff;
+            flex-shrink: 0;
+        }
+
+        .footer-bottom-container {
+            text-align: center;
             margin-top: 4px;
+            padding-top: 2px;
+        }
+
+        .footer-verify {
+            font-size: 11px;
             color: #333;
+            display: inline-block;
         }
 
         .action-cell {
             display: none;
-            width: 50px !important;
+            width: 45px !important;
         }
         body.edit-mode .action-cell {
             display: table-cell;
         }
         .table-controls {
             display: none;
-            margin: 5px 0;
+            margin: 4px 0;
             text-align: left;
         }
         body.edit-mode .table-controls {
@@ -243,7 +248,7 @@
             background: #17a2b8;
             color: white;
             border: none;
-            padding: 3px 8px;
+            padding: 4px 8px;
             font-size: 11px;
             cursor: pointer;
             border-radius: 3px;
@@ -251,27 +256,26 @@
         }
         .add-row-btn {
             display: none;
-            margin: 3px 0;
+            margin: 4px 0;
             background: #28a745;
             color: white;
             border: none;
-            padding: 3px 8px;
+            padding: 4px 8px;
             cursor: pointer;
             border-radius: 3px;
-            font-size: 10px;
+            font-size: 11.5px;
         }
         body.edit-mode .add-row-btn {
             display: inline-block;
         }
-        .del-btn, .del-col-btn {
+        .del-btn {
             background: #dc3545;
             color: white;
             border: none;
-            padding: 1px 4px;
+            padding: 2px 5px;
             cursor: pointer;
             border-radius: 3px;
-            font-size: 9px;
-            margin-left: 2px;
+            font-size: 10px;
         }
 
         .modal-overlay {
@@ -311,7 +315,7 @@
         .btn-cancel { background: #dc3545; color: white; }
 
         @media print {
-            .top-bar-wrapper, .action-cell, .table-controls, .del-btn, .del-col-btn, .add-row-btn, .modal-overlay {
+            .top-bar-wrapper, .action-cell, .table-controls, .del-btn, .add-row-btn, .modal-overlay {
                 display: none !important;
             }
             body {
@@ -320,10 +324,8 @@
             }
             .container {
                 box-shadow: none;
-                padding: 10mm 12mm;
-                border: 2px solid #000;
-                outline: 6px double #000;
-                outline-offset: -8px;
+                padding: 8mm 10mm;
+                border: 3px double #000 !important;
                 height: 297mm;
             }
         }
@@ -361,242 +363,242 @@
             <div class="container" id="receipt-container">
               <div>
                 <div class="top-header">
-                  <div style="width: 55px;">
+                  <div style="width: 45px;">
                   </div>
                   <div class="header-center">
-                    <div class="top-center-logo">লোগো</div>
+                    <div class="top-center-logo editable-field" contenteditable="false">লোগো</div>
                     <h2>
-                      <span contenteditable="false">চর অষ্টধর ইউনিয়ন পরিষদ</span>
+                      <span class="editable-field" contenteditable="false">চর অষ্টধর ইউনিয়ন পরিষদ</span>
                     </h2>
                     <p>
-                      <span contenteditable="false">নকলা, শেরপুর, বাংলাদেশ।</span>
+                      <span class="editable-field" contenteditable="false">নকলা, শেরপুর, বাংলাদেশ।</span>
                     </p>
                   </div>
-                  <div class="qr-top">
-                    QR Code
+                  <div style="width: 45px;">
                   </div>
                 </div>
                 <div class="certificate-title-box">
                   <h3>
-                    <span contenteditable="false">উত্তরাধিকার সনদ</span>
+                    <span class="editable-field" contenteditable="false">উত্তরাধিকার সনদ</span>
                   </h3>
                 </div>
                 <div class="meta-info">
-                  <div>
-                    <span contenteditable="false" id="cert-no-field">সনদ নং:- ০২৯২৩০৫১৫০</span>
-                  </div>
-                  <div>ইস্যু তারিখ:- <span contenteditable="false">১৪ই সেপ্টেম্বর ২০২৬</span>
+                  <div class="editable-field" contenteditable="false">সনদ নং:- <span class="editable-field" contenteditable="false">০২৯২৩০৫১৫০</span>
                 </div>
-              </div>
-              <div class="body-text" contenteditable="false">
-                এই মর্মে প্রত্যয়ন করা যাইতেছে যে, মৃত আবূ বকর সিদ্দিক, পিতা/স্বামী: মৃত আছের মাহমুদ, মাতা: মৃত রায়জান অত্র এলাকার একজন স্থায়ী বাসিন্দা। তাহার স্থায়ী ঠিকানাঃ- গ্রাম/বাড়ীঃ দধিয়ার চর, ডাকঘরঃ কাজীকাইটা - ২১৫০, ওয়ার্ড নম্বরঃ ২, চর অষ্টধর ইউনিয়ন, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। বর্তমান ঠিকানাঃ- গ্রাম/বাড়ীঃ দধিয়ার চর, ডাকঘরঃ কাজীকাইটা - ২১৫০, ওয়ার্ড নম্বরঃ ২, চর অষ্টধর ইউনিয়ন, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। প্রদানকৃত নথি ও সাক্ষীর সাক্ষ্য অনুযায়ী, মৃত্যুকালে তিনি তাহার নিম্ন বর্ণিত উত্তরাধিকারগণ রাখিয়া মৃত্যুবরণ করিয়াছেন।
-              </div>
-              <div class="table-controls">
-                <button onclick="addColumn()">➕ নতুন কলাম যোগ করুন</button>
-              </div>
-              <table id="warish-table">
-                <thead>
-                  <tr id="table-header-row">
-                    <th style="width: 8%;" contenteditable="false">ক্রমিক নং</th>
-                    <th style="width: 24%;" contenteditable="false">নাম</th>
-                    <th style="width: 15%;" contenteditable="false">জন্ম তারিখ</th>
-                    <th style="width: 8%;" contenteditable="false">বয়স</th>
-                    <th style="width: 22%;" contenteditable="false">সম্পর্ক</th>
-                    <th style="width: 23%;" contenteditable="false">মন্তব্য</th>
-                    <th class="action-cell">অ্যাকশন</th>
-                  </tr>
-                </thead>
-                <tbody id="heir-tbody">
-                  <tr>
-                    <td contenteditable="false">১</td>
-                    <td contenteditable="false">জাহাঙ্গীর আলম</td>
-                    <td contenteditable="false">০১-০২-১৯৬৬</td>
-                    <td contenteditable="false">৬১</td>
-                    <td contenteditable="false">২য় স্ত্রীর পুত্র</td>
-                    <td contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">২</td>
-                    <td contenteditable="false">জামাল উদ্দিন</td>
-                    <td contenteditable="false">০৭-০৭-১৯৬৯</td>
-                    <td contenteditable="false">৫৭</td>
-                    <td contenteditable="false">২য় স্ত্রীর পুত্র</td>
-                    <td contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">৩</td>
-                    <td contenteditable="false">ছাইফুল ইসলাম</td>
-                    <td contenteditable="false">০৭-১০-১৯৭৩</td>
-                    <td contenteditable="false">৫৩</td>
-                    <td contenteditable="false">২য় স্ত্রীর পুত্র</td>
-                    <td contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">৪</td>
-                    <td contenteditable="false">মোছাঃ রহিমা খাতুন</td>
-                    <td contenteditable="false">০১-০২-১৯৬৬</td>
-                    <td contenteditable="false">৬১</td>
-                    <td contenteditable="false">২য় স্ত্রীর কন্যা</td>
-                    <td contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">৫</td>
-                    <td contenteditable="false">মোছাঃ জেসমিন</td>
-                    <td contenteditable="false">০২-০৪-১৯৭৯</td>
-                    <td contenteditable="false">৪৭</td>
-                    <td contenteditable="false">২য় স্ত্রীর কন্যা</td>
-                    <td contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">৬</td>
-                    <td contenteditable="false">আফরোজা বেগম</td>
-                    <td contenteditable="false">০৫-০১-১৯৮৩</td>
-                    <td contenteditable="false">৪৪</td>
-                    <td contenteditable="false">২য় স্ত্রীর কন্যা</td>
-                    <td contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">৭</td>
-                    <td contenteditable="false">মোছাঃ হাবিজা খাতুন</td>
-                    <td contenteditable="false">০১-০০-১৯৩৭</td>
-                    <td contenteditable="false">৯০</td>
-                    <td contenteditable="false">কন্যা</td>
-                    <td contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">৮</td>
-                    <td contenteditable="false">মোছাঃ হামিদা বেগম</td>
-                    <td contenteditable="false">০৪-০০-১৯৫২</td>
-                    <td contenteditable="false">৭৫</td>
-                    <td contenteditable="false">কন্যা</td>
-                    <td contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">৯</td>
-                    <td contenteditable="false">মোছাঃ খালেদা বেগম</td>
-                    <td contenteditable="false">০৩-০৫-১৯৬৪</td>
-                    <td contenteditable="false">৬২</td>
-                    <td contenteditable="false">কন্যা</td>
-                    <td contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">১০</td>
-                    <td contenteditable="false">শাহিদা বেগম</td>
-                    <td contenteditable="false">১০-১০-১৯৫৩</td>
-                    <td contenteditable="false">৭৩</td>
-                    <td contenteditable="false">কন্যা</td>
-                    <td contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">১১</td>
-                    <td contenteditable="false">মোছাঃ শাহেদা বেগম</td>
-                    <td contenteditable="false">০৫-০৩-১৯৬৮</td>
-                    <td contenteditable="false">৫৯</td>
-                    <td contenteditable="false">কন্যা</td>
-                    <td contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">১২</td>
-                    <td contenteditable="false">মোছাঃ রাশিদা আক্তার</td>
-                    <td contenteditable="false">১৫-০২-১৯৭৪</td>
-                    <td contenteditable="false">৫৩</td>
-                    <td contenteditable="false">কন্যা</td>
-                    <td contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">১৩</td>
-                    <td contenteditable="false">মৃত হাসনা বানু</td>
-                    <td contenteditable="false">--</td>
-                    <td contenteditable="false">--</td>
-                    <td contenteditable="false">স্ত্রী</td>
-                    <td contenteditable="false">মৃত ব্যক্তির স্ত্রী</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td contenteditable="false">১৪</td>
-                    <td contenteditable="false">মৃত জহুরা বেগম</td>
-                    <td contenteditable="false">--</td>
-                    <td contenteditable="false">--</td>
-                    <td contenteditable="false">২য় স্ত্রী</td>
-                    <td contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রী</td>
-                    <td class="action-cell">
-                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <button class="add-row-btn" onclick="addRow()">＋ ওয়ারিশ যোগ করুন</button>
-              <div class="notice-section" contenteditable="false">
-                উল্লিখিত ব্যক্তি/ব্যক্তিগণ ছাড়া মৃত ব্যক্তির আর কোনো উত্তরাধিকার নাই। সকল প্রকার দেনাপাওনা/সম্পত্তি/বিষয় নিষ্পত্তি করার বাপারে কেবলমাত্র উল্লিখিত ব্যক্তি/ব্যক্তিগণই উত্তরাধিকারী বিবেচিত হইবে।
-              </div>
-              <div class="notice-section" contenteditable="false" style="margin-top: 4px;">
-                আমি প্রয়াগতের আত্মার শান্তি ও উত্তরাধিকারীগণের মঙ্গল কামনা করিতেছি।
-              </div>
-              <div class="notice-section" contenteditable="false" style="margin-top: 4px;">
-                <b>বিঃদ্রঃ</b> আবেদনকারী যদি ইচ্ছাকৃতভাবে কোন উত্তরাধিকার বাদ দিয়ে থাকেন বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য চর অষ্টধর ইউনিয়ন পরিষদ কার্যালয় কোনভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল বলিয়া গণ্য হইবে।
+                <div class="editable-field" contenteditable="false">ইস্যু তারিখ:- <span class="editable-field" contenteditable="false">১৪ই সেপ্টেম্বর ২০২৬</span>
               </div>
             </div>
-            <div class="signature-area">
-              <div class="sign-row">
-                <div style="width: 33%;">
+            <div class="body-text editable-field" contenteditable="false">
+              এই মর্মে প্রত্যয়ন করা যাইতেছে যে, মৃত আবূ বকর সিদ্দিক, পিতা/স্বামী: মৃত আছের মাহমুদ, মাতা: মৃত রায়জান অত্র এলাকার একজন স্থায়ী বাসিন্দা। তাহার স্থায়ী ঠিকানাঃ- গ্রাম/বাড়ীঃ দধিয়ার চর, ডাকঘরঃ কাজীকাইটা - ২১৫০, ওয়ার্ড নম্বরঃ ২, চর অষ্টধর ইউনিয়ন, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। বর্তমান ঠিকানাঃ- গ্রাম/বাড়ীঃ দধিয়ার চর, ডাকঘরঃ কাজীকাইটা - ২১৫০, ওয়ার্ড নম্বরঃ ২, চর অষ্টধর ইউনিয়ন, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। প্রদানকৃত নথি ও সাক্ষীর সাক্ষ্য অনুযায়ী, মৃত্যুকালে তিনি তাহার নিম্ন বর্ণিত উত্তরাধিকারগণ রাখিয়া মৃত্যুবরণ করিয়াছেন।
+            </div>
+            <div class="table-controls">
+              <button onclick="addColumn()">➕ নতুন কলাম যোগ করুন</button>
+            </div>
+            <table id="warish-table">
+              <thead>
+                <tr id="table-header-row">
+                  <th style="width: 9%;" class="editable-field" contenteditable="false">ক্রমিক নং</th>
+                  <th style="width: 25%;" class="editable-field" contenteditable="false">নাম</th>
+                  <th style="width: 16%;" class="editable-field" contenteditable="false">জন্ম তারিখ</th>
+                  <th style="width: 9%;" class="editable-field" contenteditable="false">বয়স</th>
+                  <th style="width: 20%;" class="editable-field" contenteditable="false">সম্পর্ক</th>
+                  <th style="width: 21%;" class="editable-field" contenteditable="false">মন্তব্য</th>
+                  <th class="action-cell">অ্যাকশন</th>
+                </tr>
+              </thead>
+              <tbody id="heir-tbody">
+                <tr>
+                  <td class="editable-field" contenteditable="false">১</td>
+                  <td class="editable-field" contenteditable="false">জাহাঙ্গীর আলম</td>
+                  <td class="editable-field" contenteditable="false">০১-০২-১৯৬৬</td>
+                  <td class="editable-field" contenteditable="false">৬১</td>
+                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর পুত্র</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">২</td>
+                  <td class="editable-field" contenteditable="false">জামাল উদ্দিন</td>
+                  <td class="editable-field" contenteditable="false">০৭-০৭-১৯৬৯</td>
+                  <td class="editable-field" contenteditable="false">৫৭</td>
+                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর পুত্র</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">৩</td>
+                  <td class="editable-field" contenteditable="false">ছাইফুল ইসলাম</td>
+                  <td class="editable-field" contenteditable="false">০৭-১০-১৯৭৩</td>
+                  <td class="editable-field" contenteditable="false">৫৩</td>
+                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর পুত্র</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">৪</td>
+                  <td class="editable-field" contenteditable="false">মোছাঃ রহিমা খাতুন</td>
+                  <td class="editable-field" contenteditable="false">০১-০২-১৯৬৬</td>
+                  <td class="editable-field" contenteditable="false">৬১</td>
+                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর কন্যা</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">৫</td>
+                  <td class="editable-field" contenteditable="false">মোছাঃ জেসমিন</td>
+                  <td class="editable-field" contenteditable="false">০২-০৪-১৯৭৯</td>
+                  <td class="editable-field" contenteditable="false">৪৭</td>
+                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর কন্যা</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">৬</td>
+                  <td class="editable-field" contenteditable="false">আফরোজা বেগম</td>
+                  <td class="editable-field" contenteditable="false">০৫-০১-১৯৮৩</td>
+                  <td class="editable-field" contenteditable="false">৪৪</td>
+                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর কন্যা</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">৭</td>
+                  <td class="editable-field" contenteditable="false">মোছাঃ হাবিজা খাতুন</td>
+                  <td class="editable-field" contenteditable="false">০১-০০-১৯৩৭</td>
+                  <td class="editable-field" contenteditable="false">৯০</td>
+                  <td class="editable-field" contenteditable="false">কন্যা</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">৮</td>
+                  <td class="editable-field" contenteditable="false">মোছাঃ হামিদা বেগম</td>
+                  <td class="editable-field" contenteditable="false">০৪-০০-১৯৫২</td>
+                  <td class="editable-field" contenteditable="false">৭৫</td>
+                  <td class="editable-field" contenteditable="false">কন্যা</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">৯</td>
+                  <td class="editable-field" contenteditable="false">মোছাঃ খালেদা বেগম</td>
+                  <td class="editable-field" contenteditable="false">০৩-০৫-১৯৬৪</td>
+                  <td class="editable-field" contenteditable="false">৬২</td>
+                  <td class="editable-field" contenteditable="false">কন্যা</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">১০</td>
+                  <td class="editable-field" contenteditable="false">শাহিদা বেগম</td>
+                  <td class="editable-field" contenteditable="false">১০-১০-১৯৫৩</td>
+                  <td class="editable-field" contenteditable="false">৭৩</td>
+                  <td class="editable-field" contenteditable="false">কন্যা</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">১১</td>
+                  <td class="editable-field" contenteditable="false">মোছাঃ শাহেদা বেগম</td>
+                  <td class="editable-field" contenteditable="false">০৫-০৩-১৯৬৮</td>
+                  <td class="editable-field" contenteditable="false">৫৯</td>
+                  <td class="editable-field" contenteditable="false">কন্যা</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">১২</td>
+                  <td class="editable-field" contenteditable="false">মোছাঃ রাশিদা আক্তার</td>
+                  <td class="editable-field" contenteditable="false">১৫-০২-১৯৭৪</td>
+                  <td class="editable-field" contenteditable="false">৫৩</td>
+                  <td class="editable-field" contenteditable="false">কন্যা</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">১৩</td>
+                  <td class="editable-field" contenteditable="false">মৃত হাসনা বানু</td>
+                  <td class="editable-field" contenteditable="false">--</td>
+                  <td class="editable-field" contenteditable="false">--</td>
+                  <td class="editable-field" contenteditable="false">স্ত্রী</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির স্ত্রী</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="editable-field" contenteditable="false">১৪</td>
+                  <td class="editable-field" contenteditable="false">মৃত জহুরা বেগম</td>
+                  <td class="editable-field" contenteditable="false">--</td>
+                  <td class="editable-field" contenteditable="false">--</td>
+                  <td class="editable-field" contenteditable="false">২য় স্ত্রী</td>
+                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রী</td>
+                  <td class="action-cell">
+                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <button class="add-row-btn" onclick="addRow()">＋ ওয়ারিশ যোগ করুন</button>
+            <div class="notice-section editable-field" contenteditable="false">
+              উল্লিখিত ব্যক্তি/ব্যক্তিগণ ছাড়া মৃত ব্যক্তির আর কোনো উত্তরাধিকার নাই। সকল প্রকার দেনাপাওনা/সম্পত্তি/বিষয় নিষ্পত্তি করার বাপারে কেবলমাত্র উল্লিখিত ব্যক্তি/ব্যক্তিগণই উত্তরাধিকারী বিবেচিত হইবে।
+            </div>
+            <div class="notice-section editable-field" contenteditable="false" style="margin-top: 5px;">
+              আমি প্রয়াগতের আত্মার শান্তি ও উত্তরাধিকারীগণের মঙ্গল কামনা করিতেছি।
+            </div>
+            <div class="notice-section editable-field" contenteditable="false" style="margin-top: 5px;">
+              <b>বিঃদ্রঃ</b> আবেদনকারী যদি ইচ্ছাকৃতভাবে কোন উত্তরাধিকার বাদ দিয়ে থাকেন বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য চর অষ্টধর ইউনিয়ন পরিষদ কার্যালয় কোনভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল বলিয়া গণ্য হইবে।
+            </div>
+          </div>
+          <div class="signature-area">
+            <div class="sign-row">
+              <div class="qr-bottom editable-field" contenteditable="false">
+                QR Code
+              </div>
+              <div class="sign-box" style="width: 36%; text-align: right;">
+                <span class="editable-field" contenteditable="false">
+                  <b style="font-size: 13.5px;">মোঃ দুলাল উদ্দিন</b>
+                  <br>
+                    প্যানেল চেয়ারম্যান<br>
+                    চর অষ্টধর ইউনিয়ন পরিষদ<br>
+                    নকলা, শেরপুর, বাংলাদেশ।
+                  </span>
                 </div>
-                <div class="sign-box" style="width: 34%; text-align: right;">
-                  <span contenteditable="false">
-                    <b style="font-size: 12px;">মোঃ দুলাল উদ্দিন</b>
-                    <br>
-                      প্যানেল চেয়ারম্যান<br>
-                      চর অষ্টধর ইউনিয়ন পরিষদ<br>
-                      নকলা, শেরপুর, বাংলাদেশ।
-                    </span>
-                  </div>
-                </div>
-                <!-- নতুন ঠিকানা ও আন্ডারলাইন রিমুভ করা হয়েছে -->
-                <div class="footer-verify" contenteditable="false" id="footer-verify-box">
+              </div>
+              <div class="footer-bottom-container">
+                <div class="footer-verify editable-field" contenteditable="false" id="footer-verify-box">
                   যাচাইকরণ: https://my-online-wvw.github.io/qov-sonod-veryfi/?code=22061995228
                 </div>
               </div>
             </div>
-            <script>
+          </div>
+          <script>
     const ADMIN_PASSWORD = "1234";
-    const STORAGE_KEY = 'char_astadhar_warish_v7';
+    const STORAGE_KEY = 'char_astadhar_warish_v22';
 
     const defaultTemplateHTML = document.getElementById('receipt-container').innerHTML;
 
@@ -621,13 +623,12 @@
         if (pass === ADMIN_PASSWORD) {
             closePasswordModal();
             let container = document.getElementById('receipt-container');
-            let editables = container.querySelectorAll('h2, h3, p, span, th:not(:last-child), td:not(:last-child), .body-text, .notice-section, .footer-verify');
+            let editables = container.querySelectorAll('.editable-field');
 
             document.body.classList.add('edit-mode');
             editables.forEach(el => el.setAttribute('contenteditable', 'true'));
             
-            addColDeleteButtons();
-            alert("এডিট মোড চালু হয়েছে।");
+            alert("এডিট মোড চালু হয়েছে। এখন সনদ নং, তারিখসহ প্রতিটি অক্ষর স্বাধীনভাবে এডিট করতে পারবেন।");
         } else {
             alert("ভুল পাসওয়ার্ড!");
         }
@@ -645,16 +646,13 @@
         }
         
         let range = selection.getRangeAt(0);
-        let selectedText = range.toString();
-        if(!selectedText) return;
-
         let containerElement = range.commonAncestorContainer;
         if (containerElement.nodeType === 3) { 
             containerElement = containerElement.parentNode;
         }
         
         let currentSize = parseFloat(window.getComputedStyle(containerElement).fontSize);
-        if (!currentSize || isNaN(currentSize)) currentSize = 11.5;
+        if (!currentSize || isNaN(currentSize)) currentSize = 13;
 
         let newSize = currentSize;
         if (action === 'increase') {
@@ -665,40 +663,14 @@
 
         let span = document.createElement("span");
         span.style.fontSize = newSize + 'px';
-        span.appendChild(range.extractContents());
+        let extracted = range.extractContents();
+        span.appendChild(extracted);
         range.insertNode(span);
         
+        let newRange = document.createRange();
+        newRange.selectNodeContents(span);
         selection.removeAllRanges();
-    }
-
-    function addColDeleteButtons() {
-        let headerRow = document.getElementById('table-header-row');
-        if (!headerRow) return;
-        let ths = headerRow.querySelectorAll('th');
-        for (let i = 0; i < ths.length - 1; i++) {
-            if (!ths[i].querySelector('.del-col-btn')) {
-                let delBtn = document.createElement('button');
-                delBtn.className = 'del-col-btn';
-                delBtn.innerText = '✕';
-                delBtn.title = 'এই কলামটি ডিলিট করুন';
-                delBtn.onclick = function() { deleteColumn(this); };
-                ths[i].appendChild(delBtn);
-            }
-        }
-    }
-
-    function redistributeWidths() {
-        let headerRow = document.getElementById('table-header-row');
-        if(!headerRow) return;
-        let ths = headerRow.querySelectorAll('th');
-        let usableCols = ths[1] && ths[ths.length-1].classList.contains('action-cell') ? ths.length - 1 : ths.length;
-        let percentage = (100 / usableCols).toFixed(2) + '%';
-        
-        ths.forEach((th, index) => {
-            if(!th.classList.contains('action-cell')) {
-                th.style.width = percentage;
-            }
-        });
+        selection.addRange(newRange);
     }
 
     function addColumn() {
@@ -709,15 +681,9 @@
         let actionTh = headerRow.lastElementChild;
         
         let newTh = document.createElement('th');
+        newTh.className = 'editable-field';
         newTh.setAttribute('contenteditable', 'true');
         newTh.innerText = colName;
-        
-        let delBtn = document.createElement('button');
-        delBtn.className = 'del-col-btn';
-        delBtn.innerText = '✕';
-        delBtn.title = 'এই কলামটি ডিলিট করুন';
-        delBtn.onclick = function() { deleteColumn(this); };
-        newTh.appendChild(delBtn);
         
         headerRow.insertBefore(newTh, actionTh);
 
@@ -726,6 +692,7 @@
         rows.forEach(row => {
             let actionTd = row.lastElementChild;
             let newTd = document.createElement('td');
+            newTd.className = 'editable-field';
             newTd.setAttribute('contenteditable', 'true');
             newTd.innerText = '--';
             row.insertBefore(newTd, actionTd);
@@ -734,30 +701,21 @@
         redistributeWidths();
     }
 
-    function deleteColumn(btn) {
-        let th = btn.closest('th');
+    function redistributeWidths() {
         let headerRow = document.getElementById('table-header-row');
+        if(!headerRow) return;
+        let ths = headerRow.querySelectorAll('th');
+        let usableCols = 0;
+        ths.forEach(th => {
+            if(!th.classList.contains('action-cell')) usableCols++;
+        });
+        let percentage = (100 / usableCols).toFixed(2) + '%';
         
-        let contentThs = Array.from(headerRow.children).filter(el => !el.classList.contains('action-cell'));
-        if (contentThs.length <= 1) {
-            alert("কমপক্ষে একটি কলাম থাকা আবশ্যক!");
-            return;
-        }
-
-        if (confirm("সত্যিই এই কলামটি মুছে ফেলতে চান?")) {
-            let index = Array.from(headerRow.children).indexOf(th);
-            th.remove();
-
-            let tbody = document.getElementById('heir-tbody');
-            let rows = tbody.querySelectorAll('tr');
-            rows.forEach(row => {
-                if (row.children[index]) {
-                    row.children[index].remove();
-                }
-            });
-
-            redistributeWidths();
-        }
+        ths.forEach(th => {
+            if(!th.classList.contains('action-cell')) {
+                th.style.width = percentage;
+            }
+        });
     }
 
     function addRow() {
@@ -773,7 +731,7 @@
         
         let rowHTML = '';
         for (let i = 0; i < colCount; i++) {
-            rowHTML += `<td contenteditable="true">--</td>`;
+            rowHTML += `<td class="editable-field" contenteditable="true">--</td>`;
         }
         rowHTML += `<td class="action-cell"><button class="del-btn" onclick="deleteRow(this)">ডিলিট</button></td>`;
         
@@ -788,9 +746,7 @@
 
     function saveChanges() {
         let container = document.getElementById('receipt-container');
-        container.querySelectorAll('.del-col-btn').forEach(btn => btn.remove());
-        
-        let editables = container.querySelectorAll('h2, h3, p, span, th, td, .body-text, .notice-section, .footer-verify');
+        let editables = container.querySelectorAll('.editable-field');
         editables.forEach(el => el.setAttribute('contenteditable', 'false'));
 
         localStorage.setItem(STORAGE_KEY, container.innerHTML);
@@ -814,5 +770,5 @@
         loadSavedData(); 
     };
 </script>
-          </body>
-        </html>
+        </body>
+      </html>
