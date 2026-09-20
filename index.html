@@ -4,7 +4,29 @@
     <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>উত্তরাধিকার সনদ - চর অষ্টধর ইউনিয়ন পরিষদ</title>
-        <style>
+        <!-- বাংলা ফন্টগুলোর জন্য অনলাইন লিংক (Google Fonts & CDN) -->
+        <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600&family=Hind+Siliguri:wght@400;600&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet">
+          <style>
+        /* ফন্ট স্টাইল ক্লাসসমূহ */
+        body.font-solaiman {
+            font-family: 'SolaimanLipi', Arial, sans-serif !important;
+        }
+        body.font-nikosh {
+            font-family: 'Nikosh', 'Hind Siliguri', 'Anek Bangla', sans-serif !important;
+        }
+        body.font-kalpurush {
+            font-family: 'Kalpurush', 'Tiro Bangla', serif !important;
+        }
+        body.font-siyam {
+            font-family: 'Siyam Rupali', 'Hind Siliguri', sans-serif !important;
+        }
+        body.font-anek {
+            font-family: 'Anek Bangla', sans-serif !important;
+        }
+        body.font-SolaimanLipiClassic {
+            font-family: 'SolaimanLipi', 'Tiro Bangla', sans-serif !important;
+        }
+
         body {
             font-family: 'SolaimanLipi', Arial, sans-serif;
             background-color: #555;
@@ -56,6 +78,18 @@
             background: #d9534f;
         }
 
+        .font-selector-box select {
+            background: #fff;
+            color: #333;
+            border: none;
+            padding: 6px 10px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            outline: none;
+        }
+
         .format-toolbar {
             display: none;
             gap: 4px;
@@ -95,7 +129,6 @@
             overflow: hidden;
         }
 
-        /* এডিট মোডে সব লেখার নিচে হালকা আন্ডারলাইন দেখাবে */
         body.edit-mode [contenteditable="true"] {
             border-bottom: 1.5px dashed #007bff;
             cursor: text;
@@ -330,275 +363,286 @@
             }
         }
     </style>
-      </head>
-      <body>
-        <div class="top-bar-wrapper">
-          <div class="controls">
-            <button class="edit-trigger-btn" onclick="openPasswordModal()">🔐 এডিট মোড</button>
-            <button class="save-btn" onclick="saveChanges()">💾 সেভ করুন</button>
-            <button class="reset-btn" onclick="resetToDefault()">🔄 রিসেট</button>
-            <button onclick="window.print()">🖨️ প্রিন্ট</button>
-          </div>
-          <div class="format-toolbar">
-            <button onclick="formatText('bold')" title="বোল্ড করুন">
-              <b>B</b>
-            </button>
-            <button onclick="formatText('italic')" title="বাঁকা করুন">
-              <i>I</i>
-            </button>
-            <button onclick="formatText('undo')" title="আগের ধাপে ফিরে যান (Undo)">↩️</button>
-            <button onclick="changeFontSize('increase')" title="লেখা বড় করুন">A+</button>
-            <button onclick="changeFontSize('decrease')" title="লেখা ছোট করুন">A-</button>
-          </div>
-        </div>
-        <div class="modal-overlay" id="passwordModal">
-          <div class="modal-box">
-            <h4>অ্যাডমিন পাসওয়ার্ড দিন</h4>
-            <input type="password" id="adminPasswordInput" placeholder="পাসওয়ার্ড দিন">
-              <br>
-                <button class="btn-submit" onclick="verifyPassword()">প্রবেশ করুন</button>
-                <button class="btn-cancel" onclick="closePasswordModal()">বাতিল</button>
-              </div>
+        </head>
+        <body class="font-solaiman">
+          <div class="top-bar-wrapper">
+            <div class="controls">
+              <button class="edit-trigger-btn" onclick="openPasswordModal()">🔐 এডিট মোড</button>
+              <button class="save-btn" onclick="saveChanges()">💾 সেভ করুন</button>
+              <button class="reset-btn" onclick="resetToDefault()">🔄 রিসেট</button>
+              <button onclick="window.print()">🖨️ প্রিন্ট</button>
             </div>
-            <div class="container" id="receipt-container">
-              <div>
-                <div class="top-header">
-                  <div style="width: 45px;">
+            <!-- ফন্ট পরিবর্তনের ড্রপডাউন (এখন এডিট মোড ছাড়াও যেকোনো সময় পরিবর্তন করা যাবে) -->
+            <div class="font-selector-box">
+              <select id="fontSelector" onchange="changeGlobalFont(this.value)">
+                <option value="font-solaiman">সলাইমানলিপি (SolaimanLipi)</option>
+                <option value="font-nikosh">নিকোষ (Nikosh)</option>
+                <option value="font-kalpurush">কালপুরুষ (Kalpurush)</option>
+                <option value="font-siyam">সিয়াম রূপালী (Siyam Rupali)</option>
+                <option value="font-anek">অনেক বাংলা (Anek Bangla)</option>
+                <option value="font-SolaimanLipiClassic">ক্লাসিক বাংলা (Tiro Bangla)</option>
+              </select>
+            </div>
+            <div class="format-toolbar">
+              <button onclick="formatText('bold')" title="বোল্ড করুন">
+                <b>B</b>
+              </button>
+              <button onclick="formatText('italic')" title="বাঁকা করুন">
+                <i>I</i>
+              </button>
+              <button onclick="formatText('undo')" title="আগের ধাপে ফিরে যান (Undo)">↩️</button>
+              <button onclick="changeFontSize('increase')" title="লেখা বড় করুন">A+</button>
+              <button onclick="changeFontSize('decrease')" title="লেখা ছোট করুন">A-</button>
+            </div>
+          </div>
+          <div class="modal-overlay" id="passwordModal">
+            <div class="modal-box">
+              <h4>অ্যাডমিন পাসওয়ার্ড দিন</h4>
+              <input type="password" id="adminPasswordInput" placeholder="পাসওয়ার্ড দিন">
+                <br>
+                  <button class="btn-submit" onclick="verifyPassword()">প্রবেশ করুন</button>
+                  <button class="btn-cancel" onclick="closePasswordModal()">বাতিল</button>
+                </div>
+              </div>
+              <div class="container" id="receipt-container">
+                <div>
+                  <div class="top-header">
+                    <div style="width: 45px;">
+                    </div>
+                    <div class="header-center">
+                      <div class="top-center-logo editable-field" contenteditable="false">লোগো</div>
+                      <h2>
+                        <span class="editable-field" contenteditable="false">চর অষ্টধর ইউনিয়ন পরিষদ</span>
+                      </h2>
+                      <p>
+                        <span class="editable-field" contenteditable="false">নকলা, শেরপুর, বাংলাদেশ।</span>
+                      </p>
+                    </div>
+                    <div style="width: 45px;">
+                    </div>
                   </div>
-                  <div class="header-center">
-                    <div class="top-center-logo editable-field" contenteditable="false">লোগো</div>
-                    <h2>
-                      <span class="editable-field" contenteditable="false">চর অষ্টধর ইউনিয়ন পরিষদ</span>
-                    </h2>
-                    <p>
-                      <span class="editable-field" contenteditable="false">নকলা, শেরপুর, বাংলাদেশ।</span>
-                    </p>
+                  <div class="certificate-title-box">
+                    <h3>
+                      <span class="editable-field" contenteditable="false">উত্তরাধিকার সনদ</span>
+                    </h3>
                   </div>
-                  <div style="width: 45px;">
+                  <div class="meta-info">
+                    <div class="editable-field" contenteditable="false">সনদ নং:- <span class="editable-field" contenteditable="false">০২৯২৩০৫১৫০</span>
+                  </div>
+                  <div class="editable-field" contenteditable="false">ইস্যু তারিখ:- <span class="editable-field" contenteditable="false">১৪ই সেপ্টেম্বর ২০২৬</span>
+                </div>
+              </div>
+              <div class="body-text editable-field" contenteditable="false">
+                এই মর্মে প্রত্যয়ন করা যাইতেছে যে, মৃত আবূ বকর সিদ্দিক, পিতা/স্বামী: মৃত আছের মাহমুদ, মাতা: মৃত রায়জান অত্র এলাকার একজন স্থায়ী বাসিন্দা। তাহার স্থায়ী ঠিকানাঃ- গ্রাম/বাড়ীঃ দধিয়ার চর, ডাকঘরঃ কাজীকাইটা - ২১৫০, ওয়ার্ড নম্বরঃ ২, চর অষ্টধর ইউনিয়ন, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। বর্তমান ঠিকানাঃ- গ্রাম/বাড়ীঃ দধিয়ার চর, ডাকঘরঃ কাজীকাইটা - ২১৫০, ওয়ার্ড নম্বরঃ ২, চর অষ্টধর ইউনিয়ন, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। প্রদানকৃত নথি ও সাক্ষীর সাক্ষ্য অনুযায়ী, মৃত্যুকালে তিনি তাহার নিম্ন বর্ণিত উত্তরাধিকারগণ রাখিয়া মৃত্যুবরণ করিয়াছেন।
+              </div>
+              <div class="table-controls">
+                <button onclick="addColumn()">➕ নতুন কলাম যোগ করুন</button>
+              </div>
+              <table id="warish-table">
+                <thead>
+                  <tr id="table-header-row">
+                    <th style="width: 9%;" class="editable-field" contenteditable="false">ক্রমিক নং</th>
+                    <th style="width: 25%;" class="editable-field" contenteditable="false">নাম</th>
+                    <th style="width: 16%;" class="editable-field" contenteditable="false">জন্ম তারিখ</th>
+                    <th style="width: 9%;" class="editable-field" contenteditable="false">বয়স</th>
+                    <th style="width: 20%;" class="editable-field" contenteditable="false">সম্পর্ক</th>
+                    <th style="width: 21%;" class="editable-field" contenteditable="false">মন্তব্য</th>
+                    <th class="action-cell">অ্যাকশন</th>
+                  </tr>
+                </thead>
+                <tbody id="heir-tbody">
+                  <tr>
+                    <td class="editable-field" contenteditable="false">১</td>
+                    <td class="editable-field" contenteditable="false">জাহাঙ্গীর আলম</td>
+                    <td class="editable-field" contenteditable="false">০১-০২-১৯৬৬</td>
+                    <td class="editable-field" contenteditable="false">৬১</td>
+                    <td class="editable-field" contenteditable="false">২য় স্ত্রীর পুত্র</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">২</td>
+                    <td class="editable-field" contenteditable="false">জামাল উদ্দিন</td>
+                    <td class="editable-field" contenteditable="false">০৭-০৭-১৯৬৯</td>
+                    <td class="editable-field" contenteditable="false">৫৭</td>
+                    <td class="editable-field" contenteditable="false">২য় স্ত্রীর পুত্র</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">৩</td>
+                    <td class="editable-field" contenteditable="false">ছাইফুল ইসলাম</td>
+                    <td class="editable-field" contenteditable="false">০৭-১০-১৯৭৩</td>
+                    <td class="editable-field" contenteditable="false">৫৩</td>
+                    <td class="editable-field" contenteditable="false">২য় স্ত্রীর পুত্র</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">৪</td>
+                    <td class="editable-field" contenteditable="false">মোছাঃ রহিমা খাতুন</td>
+                    <td class="editable-field" contenteditable="false">০১-০২-১৯৬৬</td>
+                    <td class="editable-field" contenteditable="false">৬১</td>
+                    <td class="editable-field" contenteditable="false">২য় স্ত্রীর কন্যা</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">৫</td>
+                    <td class="editable-field" contenteditable="false">মোছাঃ জেসমিন</td>
+                    <td class="editable-field" contenteditable="false">০২-০৪-১৯৭৯</td>
+                    <td class="editable-field" contenteditable="false">৪৭</td>
+                    <td class="editable-field" contenteditable="false">২য় স্ত্রীর কন্যা</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">৬</td>
+                    <td class="editable-field" contenteditable="false">আফরোজা বেগম</td>
+                    <td class="editable-field" contenteditable="false">০৫-০১-১৯৮৩</td>
+                    <td class="editable-field" contenteditable="false">৪৪</td>
+                    <td class="editable-field" contenteditable="false">২য় স্ত্রীর কন্যা</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">৭</td>
+                    <td class="editable-field" contenteditable="false">মোছাঃ হাবিজা খাতুন</td>
+                    <td class="editable-field" contenteditable="false">০১-০০-১৯৩৭</td>
+                    <td class="editable-field" contenteditable="false">৯০</td>
+                    <td class="editable-field" contenteditable="false">কন্যা</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">৮</td>
+                    <td class="editable-field" contenteditable="false">মোছাঃ হামিদা বেগম</td>
+                    <td class="editable-field" contenteditable="false">০৪-০০-১৯৫২</td>
+                    <td class="editable-field" contenteditable="false">৭৫</td>
+                    <td class="editable-field" contenteditable="false">কন্যা</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">৯</td>
+                    <td class="editable-field" contenteditable="false">মোছাঃ খালেদা বেগম</td>
+                    <td class="editable-field" contenteditable="false">০৩-০৫-১৯৬৪</td>
+                    <td class="editable-field" contenteditable="false">৬২</td>
+                    <td class="editable-field" contenteditable="false">কন্যা</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">১০</td>
+                    <td class="editable-field" contenteditable="false">শাহিদা বেগম</td>
+                    <td class="editable-field" contenteditable="false">১০-১০-১৯৫৩</td>
+                    <td class="editable-field" contenteditable="false">৭৩</td>
+                    <td class="editable-field" contenteditable="false">কন্যা</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">১১</td>
+                    <td class="editable-field" contenteditable="false">মোছাঃ শাহেদা বেগম</td>
+                    <td class="editable-field" contenteditable="false">০৫-০৩-১৯৬৮</td>
+                    <td class="editable-field" contenteditable="false">৫৯</td>
+                    <td class="editable-field" contenteditable="false">কন্যা</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">১২</td>
+                    <td class="editable-field" contenteditable="false">মোছাঃ রাশিদা আক্তার</td>
+                    <td class="editable-field" contenteditable="false">১৫-০২-১৯৭৪</td>
+                    <td class="editable-field" contenteditable="false">৫৩</td>
+                    <td class="editable-field" contenteditable="false">কন্যা</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">১৩</td>
+                    <td class="editable-field" contenteditable="false">মৃত হাসনা বানু</td>
+                    <td class="editable-field" contenteditable="false">--</td>
+                    <td class="editable-field" contenteditable="false">--</td>
+                    <td class="editable-field" contenteditable="false">স্ত্রী</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির স্ত্রী</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="editable-field" contenteditable="false">১৪</td>
+                    <td class="editable-field" contenteditable="false">মৃত জহুরা বেগম</td>
+                    <td class="editable-field" contenteditable="false">--</td>
+                    <td class="editable-field" contenteditable="false">--</td>
+                    <td class="editable-field" contenteditable="false">২য় স্ত্রী</td>
+                    <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রী</td>
+                    <td class="action-cell">
+                      <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <button class="add-row-btn" onclick="addRow()">＋ ওয়ারিশ যোগ করুন</button>
+              <div class="notice-section editable-field" contenteditable="false">
+                উল্লিখিত ব্যক্তি/ব্যক্তিগণ ছাড়া মৃত ব্যক্তির আর কোনো উত্তরাধিকার নাই। সকল প্রকার দেনাপাওনা/সম্পত্তি/বিষয় নিষ্পত্তি করার বাপারে কেবলমাত্র উল্লিখিত ব্যক্তি/ব্যক্তিগণই উত্তরাধিকারী বিবেচিত হইবে।
+              </div>
+              <div class="notice-section editable-field" contenteditable="false" style="margin-top: 5px;">
+                আমি প্রয়াগতের আত্মার শান্তি ও উত্তরাধিকারীগণের মঙ্গল কামনা করিতেছি।
+              </div>
+              <div class="notice-section editable-field" contenteditable="false" style="margin-top: 5px;">
+                <b>বিঃদ্রঃ</b> আবেদনকারী যদি ইচ্ছাকৃতভাবে কোন উত্তরাধিকার বাদ দিয়ে থাকেন বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য চর অষ্টধর ইউনিয়ন পরিষদ কার্যালয় কোনভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল বলিয়া গণ্য হইবে।
+              </div>
+            </div>
+            <div class="signature-area">
+              <div class="sign-row">
+                <div class="qr-bottom editable-field" contenteditable="false">
+                  QR Code
+                </div>
+                <div class="sign-box" style="width: 36%; text-align: right;">
+                  <span class="editable-field" contenteditable="false">
+                    <b style="font-size: 13.5px;">মোঃ দুলাল উদ্দিন</b>
+                    <br>
+                      প্যানেল চেয়ারম্যান<br>
+                      চর অষ্টধর ইউনিয়ন পরিষদ<br>
+                      নকলা, শেরপুর, বাংলাদেশ।
+                    </span>
                   </div>
                 </div>
-                <div class="certificate-title-box">
-                  <h3>
-                    <span class="editable-field" contenteditable="false">উত্তরাধিকার সনদ</span>
-                  </h3>
-                </div>
-                <div class="meta-info">
-                  <div class="editable-field" contenteditable="false">সনদ নং:- <span class="editable-field" contenteditable="false">০২৯২৩০৫১৫০</span>
-                </div>
-                <div class="editable-field" contenteditable="false">ইস্যু তারিখ:- <span class="editable-field" contenteditable="false">১৪ই সেপ্টেম্বর ২০২৬</span>
-              </div>
-            </div>
-            <div class="body-text editable-field" contenteditable="false">
-              এই মর্মে প্রত্যয়ন করা যাইতেছে যে, মৃত আবূ বকর সিদ্দিক, পিতা/স্বামী: মৃত আছের মাহমুদ, মাতা: মৃত রায়জান অত্র এলাকার একজন স্থায়ী বাসিন্দা। তাহার স্থায়ী ঠিকানাঃ- গ্রাম/বাড়ীঃ দধিয়ার চর, ডাকঘরঃ কাজীকাইটা - ২১৫০, ওয়ার্ড নম্বরঃ ২, চর অষ্টধর ইউনিয়ন, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। বর্তমান ঠিকানাঃ- গ্রাম/বাড়ীঃ দধিয়ার চর, ডাকঘরঃ কাজীকাইটা - ২১৫০, ওয়ার্ড নম্বরঃ ২, চর অষ্টধর ইউনিয়ন, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। প্রদানকৃত নথি ও সাক্ষীর সাক্ষ্য অনুযায়ী, মৃত্যুকালে তিনি তাহার নিম্ন বর্ণিত উত্তরাধিকারগণ রাখিয়া মৃত্যুবরণ করিয়াছেন।
-            </div>
-            <div class="table-controls">
-              <button onclick="addColumn()">➕ নতুন কলাম যোগ করুন</button>
-            </div>
-            <table id="warish-table">
-              <thead>
-                <tr id="table-header-row">
-                  <th style="width: 9%;" class="editable-field" contenteditable="false">ক্রমিক নং</th>
-                  <th style="width: 25%;" class="editable-field" contenteditable="false">নাম</th>
-                  <th style="width: 16%;" class="editable-field" contenteditable="false">জন্ম তারিখ</th>
-                  <th style="width: 9%;" class="editable-field" contenteditable="false">বয়স</th>
-                  <th style="width: 20%;" class="editable-field" contenteditable="false">সম্পর্ক</th>
-                  <th style="width: 21%;" class="editable-field" contenteditable="false">মন্তব্য</th>
-                  <th class="action-cell">অ্যাকশন</th>
-                </tr>
-              </thead>
-              <tbody id="heir-tbody">
-                <tr>
-                  <td class="editable-field" contenteditable="false">১</td>
-                  <td class="editable-field" contenteditable="false">জাহাঙ্গীর আলম</td>
-                  <td class="editable-field" contenteditable="false">০১-০২-১৯৬৬</td>
-                  <td class="editable-field" contenteditable="false">৬১</td>
-                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর পুত্র</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">২</td>
-                  <td class="editable-field" contenteditable="false">জামাল উদ্দিন</td>
-                  <td class="editable-field" contenteditable="false">০৭-০৭-১৯৬৯</td>
-                  <td class="editable-field" contenteditable="false">৫৭</td>
-                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর পুত্র</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">৩</td>
-                  <td class="editable-field" contenteditable="false">ছাইফুল ইসলাম</td>
-                  <td class="editable-field" contenteditable="false">০৭-১০-১৯৭৩</td>
-                  <td class="editable-field" contenteditable="false">৫৩</td>
-                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর পুত্র</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর পুত্র</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">৪</td>
-                  <td class="editable-field" contenteditable="false">মোছাঃ রহিমা খাতুন</td>
-                  <td class="editable-field" contenteditable="false">০১-০২-১৯৬৬</td>
-                  <td class="editable-field" contenteditable="false">৬১</td>
-                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর কন্যা</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">৫</td>
-                  <td class="editable-field" contenteditable="false">মোছাঃ জেসমিন</td>
-                  <td class="editable-field" contenteditable="false">০২-০৪-১৯৭৯</td>
-                  <td class="editable-field" contenteditable="false">৪৭</td>
-                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর কন্যা</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">৬</td>
-                  <td class="editable-field" contenteditable="false">আফরোজা বেগম</td>
-                  <td class="editable-field" contenteditable="false">০৫-০১-১৯৮৩</td>
-                  <td class="editable-field" contenteditable="false">৪৪</td>
-                  <td class="editable-field" contenteditable="false">২য় স্ত্রীর কন্যা</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রীর কন্যা</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">৭</td>
-                  <td class="editable-field" contenteditable="false">মোছাঃ হাবিজা খাতুন</td>
-                  <td class="editable-field" contenteditable="false">০১-০০-১৯৩৭</td>
-                  <td class="editable-field" contenteditable="false">৯০</td>
-                  <td class="editable-field" contenteditable="false">কন্যা</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">৮</td>
-                  <td class="editable-field" contenteditable="false">মোছাঃ হামিদা বেগম</td>
-                  <td class="editable-field" contenteditable="false">০৪-০০-১৯৫২</td>
-                  <td class="editable-field" contenteditable="false">৭৫</td>
-                  <td class="editable-field" contenteditable="false">কন্যা</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">৯</td>
-                  <td class="editable-field" contenteditable="false">মোছাঃ খালেদা বেগম</td>
-                  <td class="editable-field" contenteditable="false">০৩-০৫-১৯৬৪</td>
-                  <td class="editable-field" contenteditable="false">৬২</td>
-                  <td class="editable-field" contenteditable="false">কন্যা</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">১০</td>
-                  <td class="editable-field" contenteditable="false">শাহিদা বেগম</td>
-                  <td class="editable-field" contenteditable="false">১০-১০-১৯৫৩</td>
-                  <td class="editable-field" contenteditable="false">৭৩</td>
-                  <td class="editable-field" contenteditable="false">কন্যা</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">১১</td>
-                  <td class="editable-field" contenteditable="false">মোছাঃ শাহেদা বেগম</td>
-                  <td class="editable-field" contenteditable="false">০৫-০৩-১৯৬৮</td>
-                  <td class="editable-field" contenteditable="false">৫৯</td>
-                  <td class="editable-field" contenteditable="false">কন্যা</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">১২</td>
-                  <td class="editable-field" contenteditable="false">মোছাঃ রাশিদা আক্তার</td>
-                  <td class="editable-field" contenteditable="false">১৫-০২-১৯৭৪</td>
-                  <td class="editable-field" contenteditable="false">৫৩</td>
-                  <td class="editable-field" contenteditable="false">কন্যা</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির কন্যা</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">১৩</td>
-                  <td class="editable-field" contenteditable="false">মৃত হাসনা বানু</td>
-                  <td class="editable-field" contenteditable="false">--</td>
-                  <td class="editable-field" contenteditable="false">--</td>
-                  <td class="editable-field" contenteditable="false">স্ত্রী</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির স্ত্রী</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="editable-field" contenteditable="false">১৪</td>
-                  <td class="editable-field" contenteditable="false">মৃত জহুরা বেগম</td>
-                  <td class="editable-field" contenteditable="false">--</td>
-                  <td class="editable-field" contenteditable="false">--</td>
-                  <td class="editable-field" contenteditable="false">২য় স্ত্রী</td>
-                  <td class="editable-field" contenteditable="false">মৃত ব্যক্তির ২য় স্ত্রী</td>
-                  <td class="action-cell">
-                    <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <button class="add-row-btn" onclick="addRow()">＋ ওয়ারিশ যোগ করুন</button>
-            <div class="notice-section editable-field" contenteditable="false">
-              উল্লিখিত ব্যক্তি/ব্যক্তিগণ ছাড়া মৃত ব্যক্তির আর কোনো উত্তরাধিকার নাই। সকল প্রকার দেনাপাওনা/সম্পত্তি/বিষয় নিষ্পত্তি করার বাপারে কেবলমাত্র উল্লিখিত ব্যক্তি/ব্যক্তিগণই উত্তরাধিকারী বিবেচিত হইবে।
-            </div>
-            <div class="notice-section editable-field" contenteditable="false" style="margin-top: 5px;">
-              আমি প্রয়াগতের আত্মার শান্তি ও উত্তরাধিকারীগণের মঙ্গল কামনা করিতেছি।
-            </div>
-            <div class="notice-section editable-field" contenteditable="false" style="margin-top: 5px;">
-              <b>বিঃদ্রঃ</b> আবেদনকারী যদি ইচ্ছাকৃতভাবে কোন উত্তরাধিকার বাদ দিয়ে থাকেন বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য চর অষ্টধর ইউনিয়ন পরিষদ কার্যালয় কোনভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল বলিয়া গণ্য হইবে।
-            </div>
-          </div>
-          <div class="signature-area">
-            <div class="sign-row">
-              <div class="qr-bottom editable-field" contenteditable="false">
-                QR Code
-              </div>
-              <div class="sign-box" style="width: 36%; text-align: right;">
-                <span class="editable-field" contenteditable="false">
-                  <b style="font-size: 13.5px;">মোঃ দুলাল উদ্দিন</b>
-                  <br>
-                    প্যানেল চেয়ারম্যান<br>
-                    চর অষ্টধর ইউনিয়ন পরিষদ<br>
-                    নকলা, শেরপুর, বাংলাদেশ।
-                  </span>
-                </div>
-              </div>
-              <div class="footer-bottom-container">
-                <div class="footer-verify editable-field" contenteditable="false" id="footer-verify-box">
-                  যাচাইকরণ: https://my-online-wvw.github.io/qov-sonod-veryfi/?code=22061995228
+                <div class="footer-bottom-container">
+                  <div class="footer-verify editable-field" contenteditable="false" id="footer-verify-box">
+                    যাচাইকরণ: https://my-online-wvw.github.io/qov-sonod-veryfi/?code=22061995228
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <script>
+            <script>
     const ADMIN_PASSWORD = "1234";
-    const STORAGE_KEY = 'char_astadhar_warish_v22';
+    const STORAGE_KEY = 'char_astadhar_warish_v24_fonts_all';
 
     const defaultTemplateHTML = document.getElementById('receipt-container').innerHTML;
 
@@ -607,6 +651,39 @@
         if (savedHTML) {
             document.getElementById('receipt-container').innerHTML = savedHTML;
         }
+
+        // সেভ করা ফন্ট লোড করা
+        let savedFont = localStorage.getItem('certificate_selected_font');
+        if (savedFont) {
+            // বডিতে এডিট মোড ক্লাস ঠিক রেখে ফন্ট ক্লাস আপডেট করা
+            let isEditMode = document.body.classList.contains('edit-mode');
+            document.body.className = savedFont;
+            if (isEditMode) {
+                document.body.classList.add('edit-mode');
+            }
+            
+            let selector = document.getElementById('fontSelector');
+            if (selector) selector.value = savedFont;
+        }
+    }
+
+    function changeGlobalFont(fontClass) {
+        // বর্তমান এডিট মোডের স্ট্যাটাস সংরক্ষণ করা
+        let isEditMode = document.body.classList.contains('edit-mode');
+
+        // আগের ফন্ট ক্লাসগুলো মুছে ফেলা
+        document.body.classList.remove('font-solaiman', 'font-nikosh', 'font-kalpurush', 'font-siyam', 'font-anek', 'font-SolaimanLipiClassic');
+        
+        // নতুন ফন্ট ক্লাস যোগ করা
+        document.body.classList.add(fontClass);
+
+        // যদি এডিট মোড চালু থাকে, তা আবার ফিরিয়ে দেওয়া যাতে ফন্ট বদলালেও এডিট মোড না কাটে
+        if (isEditMode) {
+            document.body.classList.add('edit-mode');
+        }
+        
+        // লোকালস্টোরেজে ফন্ট সেভ করে রাখা
+        localStorage.setItem('certificate_selected_font', fontClass);
     }
 
     function openPasswordModal() {
@@ -628,7 +705,7 @@
             document.body.classList.add('edit-mode');
             editables.forEach(el => el.setAttribute('contenteditable', 'true'));
             
-            alert("এডিট মোড চালু হয়েছে। এখন সনদ নং, তারিখসহ প্রতিটি অক্ষর স্বাধীনভাবে এডিট করতে পারবেন।");
+            alert("এডিট মোড চালু হয়েছে। এখন আপনি লেখা এডিট করার পাশাপাশি ওপরের ড্রপডাউন থেকে যেকোনো সময় ফন্টও পরিবর্তন করতে পারবেন!");
         } else {
             alert("ভুল পাসওয়ার্ড!");
         }
@@ -759,8 +836,10 @@
     function resetToDefault() {
         if (confirm("আপনি কি নিশ্চিত যে সমস্ত পরিবর্তন মুছে ফেলে একদম আগের ডিফল্ট অবস্থায় ফিরে যেতে চান?")) {
             localStorage.removeItem(STORAGE_KEY);
+            localStorage.removeItem('certificate_selected_font');
             document.getElementById('receipt-container').innerHTML = defaultTemplateHTML;
-            document.body.classList.remove('edit-mode');
+            document.body.className = 'font-solaiman';
+            document.getElementById('fontSelector').value = 'font-solaiman';
             alert("পেজটি আগের অবস্থায় ফিরিয়ে নেওয়া হয়েছে।");
         }
     }
@@ -770,5 +849,5 @@
         loadSavedData(); 
     };
 </script>
-        </body>
-      </html>
+          </body>
+        </html>
