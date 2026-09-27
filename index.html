@@ -8,54 +8,22 @@
         <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600&family=Hind+Siliguri:wght@400;600&family=Tiro+Bangla:ital@0;1&family=Noto+Serif+Bengali:wght@400;600&family=Baloo+Da+2:wght@400;600&family=Mina:wght@400;700&family=Galada&display=swap" rel="stylesheet">
           <style>
         /* ফন্ট স্টাইল ক্লাসসমূহ */
-        body.font-solaiman {
-            font-family: 'SolaimanLipi', Arial, sans-serif !important;
-        }
-        body.font-nikosh {
-            font-family: 'Nikosh', 'Hind Siliguri', 'Anek Bangla', sans-serif !important;
-        }
-        body.font-kalpurush {
-            font-family: 'Kalpurush', 'Tiro Bangla', serif !important;
-        }
-        body.font-siyam {
-            font-family: 'Siyam Rupali', 'Hind Siliguri', sans-serif !important;
-        }
-        body.font-anek {
-            font-family: 'Anek Bangla', sans-serif !important;
-        }
-        body.font-SolaimanLipiClassic {
-            font-family: 'SolaimanLipi', 'Tiro Bangla', sans-serif !important;
-        }
-        body.font-noto-serif {
-            font-family: 'Noto Serif Bengali', serif !important;
-        }
-        body.font-hind {
-            font-family: 'Hind Siliguri', sans-serif !important;
-        }
-        body.font-baloo {
-            font-family: 'Baloo Da 2', cursive, sans-serif !important;
-        }
-        body.font-mina {
-            font-family: 'Mina', sans-serif !important;
-        }
-        body.font-adorsho {
-            font-family: 'AdorshoLipi', 'SolaimanLipi', sans-serif !important;
-        }
-        body.font-mukti {
-            font-family: 'Mukti', 'Kalpurush', sans-serif !important;
-        }
-        body.font-sutonnymj {
-            font-family: 'SutonnyMJ', 'SolaimanLipi', sans-serif !important;
-        }
-        body.font-gitanjali {
-            font-family: 'Gitanjali', 'SolaimanLipi', serif !important;
-        }
-        body.font-meghna {
-            font-family: 'Meghna', 'Kalpurush', sans-serif !important;
-        }
-        body.font-rupali {
-            font-family: 'Rupali', 'SolaimanLipi', sans-serif !important;
-        }
+        body.font-solaiman { font-family: 'SolaimanLipi', Arial, sans-serif !important; }
+        body.font-nikosh { font-family: 'Nikosh', 'Hind Siliguri', 'Anek Bangla', sans-serif !important; }
+        body.font-kalpurush { font-family: 'Kalpurush', 'Tiro Bangla', serif !important; }
+        body.font-siyam { font-family: 'Siyam Rupali', 'Hind Siliguri', sans-serif !important; }
+        body.font-anek { font-family: 'Anek Bangla', sans-serif !important; }
+        body.font-SolaimanLipiClassic { font-family: 'SolaimanLipi', 'Tiro Bangla', sans-serif !important; }
+        body.font-noto-serif { font-family: 'Noto Serif Bengali', serif !important; }
+        body.font-hind { font-family: 'Hind Siliguri', sans-serif !important; }
+        body.font-baloo { font-family: 'Baloo Da 2', cursive, sans-serif !important; }
+        body.font-mina { font-family: 'Mina', sans-serif !important; }
+        body.font-adorsho { font-family: 'AdorshoLipi', 'SolaimanLipi', sans-serif !important; }
+        body.font-mukti { font-family: 'Mukti', 'Kalpurush', sans-serif !important; }
+        body.font-sutonnymj { font-family: 'SutonnyMJ', 'SolaimanLipi', sans-serif !important; }
+        body.font-gitanjali { font-family: 'Gitanjali', 'SolaimanLipi', serif !important; }
+        body.font-meghna { font-family: 'Meghna', 'Kalpurush', sans-serif !important; }
+        body.font-rupali { font-family: 'Rupali', 'SolaimanLipi', sans-serif !important; }
 
         body {
             font-family: 'SolaimanLipi', Arial, sans-serif;
@@ -64,12 +32,13 @@
             padding: 5px;
         }
 
+        /* ওপরের টপ বার এবং বাটনগুলো ডান দিকে সাজানোর জন্য */
         .top-bar-wrapper {
             display: flex;
-            justify-content: center;
+            justify-content: flex-end; /* ডান দিকে পুশ করার জন্য */
             align-items: center;
             background: #333;
-            padding: 8px 10px;
+            padding: 10px 15px;
             border-radius: 6px;
             margin-bottom: 12px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.3);
@@ -78,12 +47,14 @@
             margin-right: auto;
             box-sizing: border-box;
             gap: 10px;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* ছোট স্ক্রিনে নিচে নেমে যাওয়ার বদলে ফ্লেক্স র্যাপ করবে */
         }
 
         .controls {
             display: flex;
-            gap: 5px;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
         .controls button {
             background: #0b6b3a;
@@ -93,6 +64,7 @@
             font-size: 13px;
             cursor: pointer;
             border-radius: 4px;
+            white-space: nowrap;
         }
         .controls button.save-btn, .controls button.reset-btn {
             display: none;
@@ -122,8 +94,10 @@
 
         .format-toolbar {
             display: none;
-            gap: 4px;
+            gap: 5px;
             align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
         body.edit-mode .format-toolbar {
             display: flex;
@@ -132,11 +106,12 @@
             background: #fff;
             color: #333;
             border: none;
-            padding: 5px 10px;
-            font-size: 13px;
+            padding: 5px 8px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
+            white-space: nowrap;
         }
         .format-toolbar button:hover {
             background: #ddd;
@@ -237,7 +212,6 @@
         th, td {
             padding: 4px 5px;
             text-align: center;
-            /* নাম এক লাইনে রাখার জন্য nowrap ব্যবহার করা হয়েছে */
             white-space: nowrap; 
         }
         th {
@@ -414,31 +388,25 @@
         </head>
         <body class="font-solaiman">
           <div class="top-bar-wrapper">
-            <div class="controls">
-              <button class="edit-trigger-btn" onclick="openPasswordModal()">🔐 এডিট মোড</button>
-              <button class="save-btn" onclick="saveChanges()">💾 সেভ করুন</button>
-              <button class="reset-btn" onclick="resetToDefault()">🔄 রিসেট</button>
-              <button onclick="window.print()">🖨️ প্রিন্ট</button>
-            </div>
             <!-- ফন্ট পরিবর্তনের ড্রপডাউন -->
             <div class="font-selector-box">
               <select id="fontSelector" onchange="changeGlobalFont(this.value)">
-                <option value="font-solaiman">সলাইমানলিপি (SolaimanLipi)</option>
-                <option value="font-nikosh">নিকোষ (Nikosh)</option>
-                <option value="font-kalpurush">কালপুরুষ (Kalpurush)</option>
-                <option value="font-siyam">সিয়াম রূপালী (Siyam Rupali)</option>
-                <option value="font-anek">অনেক বাংলা (Anek Bangla)</option>
-                <option value="font-SolaimanLipiClassic">ক্লাসিক বাংলা (Tiro Bangla)</option>
-                <option value="font-noto-serif">নোটো সেরিফ বাংলা (Noto Serif)</option>
-                <option value="font-hind">হিন্দ সিলিগুড়ি (Hind Siliguri)</option>
-                <option value="font-baloo">বালু দা ২ (Baloo Da 2)</option>
-                <option value="font-mina">মিনা (Mina)</option>
-                <option value="font-adorsho">আদর্শ লিপি (AdorshoLipi)</option>
-                <option value="font-mukti">মুক্তি ফন্ট (Mukti)</option>
-                <option value="font-sutonnymj">সুতর্নিক এমজে (SutonnyMJ)</option>
-                <option value="font-gitanjali">গীতাঞ্জলি (Gitanjali)</option>
-                <option value="font-meghna">মেঘনা (Meghna)</option>
-                <option value="font-rupali">রূপালী (Rupali)</option>
+                <option value="font-solaiman">সলাইমানলিপি</option>
+                <option value="font-nikosh">নিকোষ</option>
+                <option value="font-kalpurush">কালপুরুষ</option>
+                <option value="font-siyam">সিয়াম রূপালী</option>
+                <option value="font-anek">অনেক বাংলা</option>
+                <option value="font-SolaimanLipiClassic">ক্লাসিক বাংলা</option>
+                <option value="font-noto-serif">নোটো সেরিফ</option>
+                <option value="font-hind">হিন্দ সিলিগুড়ি</option>
+                <option value="font-baloo">বালু দা ২</option>
+                <option value="font-mina">মিনা</option>
+                <option value="font-adorsho">আদর্শ লিপি</option>
+                <option value="font-mukti">মুক্তি ফন্ট</option>
+                <option value="font-sutonnymj">সুতর্নিক এমজে</option>
+                <option value="font-gitanjali">গীতাঞ্জলি</option>
+                <option value="font-meghna">মেঘনা</option>
+                <option value="font-rupali">রূপালী</option>
               </select>
             </div>
             <div class="format-toolbar">
@@ -448,9 +416,17 @@
               <button onclick="formatText('italic')" title="বাঁকা করুন">
                 <i>I</i>
               </button>
-              <button onclick="formatText('undo')" title="আগের ধাপে ফিরে যান (Undo)">↩️</button>
-              <button onclick="changeFontSize('increase')" title="লেখা বড় করুন">A+</button>
-              <button onclick="changeFontSize('decrease')" title="লেখা ছোট করুন">A-</button>
+              <button onclick="formatText('undo')" title="আনডু">↩️</button>
+              <button onclick="changeFontSize('increase')" title="লেখা বড়">A+</button>
+              <button onclick="changeFontSize('decrease')" title="লেখা ছোট">A-</button>
+              <button onclick="adjustGlobalSize('increase')" title="জুম ইন">+</button>
+              <button onclick="adjustGlobalSize('decrease')" title="জুম আউট">-</button>
+            </div>
+            <div class="controls">
+              <button class="edit-trigger-btn" onclick="openPasswordModal()">🔐 এডিট</button>
+              <button class="save-btn" onclick="saveChanges()">💾 সেভ</button>
+              <button class="reset-btn" onclick="resetToDefault()">🔄 রিসেট</button>
+              <button onclick="window.print()">🖨️ প্রিন্ট</button>
             </div>
           </div>
           <div class="modal-overlay" id="passwordModal">
@@ -574,7 +550,7 @@
 </div>
 <script>
     const ADMIN_PASSWORD = "1234";
-    const STORAGE_KEY = 'char_astadhar_warish_v28_fixed';
+    const STORAGE_KEY = 'char_astadhar_warish_v29_fixed';
 
     const defaultTemplateHTML = document.getElementById('receipt-container').innerHTML;
 
@@ -595,7 +571,11 @@
             let selector = document.getElementById('fontSelector');
             if (selector) selector.value = savedFont;
         }
-        redistributeWidths();
+        
+        let savedScale = localStorage.getItem('certificate_global_scale');
+        if (savedScale) {
+            document.getElementById('receipt-container').style.zoom = savedScale;
+        }
     }
 
     function changeGlobalFont(fontClass) {
@@ -676,6 +656,24 @@
         selection.addRange(newRange);
     }
 
+    function adjustGlobalSize(action) {
+        let container = document.getElementById('receipt-container');
+        let currentZoom = parseFloat(container.style.zoom) || 1;
+        let newZoom = currentZoom;
+
+        if (action === 'increase') {
+            newZoom += 0.05;
+        } else if (action === 'decrease') {
+            newZoom -= 0.05;
+        }
+
+        if (newZoom < 0.7) newZoom = 0.7;
+        if (newZoom > 1.4) newZoom = 1.4;
+
+        container.style.zoom = newZoom;
+        localStorage.setItem('certificate_global_scale', newZoom);
+    }
+
     function addColumn() {
         let colName = prompt("নতুন কলামের নাম লিখুন:", "তথ্য");
         if (!colName) return;
@@ -700,8 +698,6 @@
             newTd.innerText = '--';
             row.insertBefore(newTd, actionTd);
         });
-
-        redistributeWidths();
     }
 
     function deleteColumn(btn) {
@@ -723,13 +719,7 @@
                     tds[colIndex].remove();
                 }
             });
-
-            redistributeWidths();
         }
-    }
-
-    function redistributeWidths() {
-        // Automatically handled by table-layout: auto
     }
 
     function addRow() {
@@ -774,7 +764,9 @@
         if (confirm("আপনি কি নিশ্চিত যে সমস্ত পরিবর্তন মুছে ফেলে একদম আগের ডিফল্ট অবস্থায় ফিরে যেতে চান?")) {
             localStorage.removeItem(STORAGE_KEY);
             localStorage.removeItem('certificate_selected_font_extended');
+            localStorage.removeItem('certificate_global_scale');
             document.getElementById('receipt-container').innerHTML = defaultTemplateHTML;
+            document.getElementById('receipt-container').style.zoom = 1;
             document.body.className = 'font-solaiman';
             document.getElementById('fontSelector').value = 'font-solaiman';
             alert("পেজটি আগের অবস্থায় ফিরিয়ে নেওয়া হয়েছে।");
