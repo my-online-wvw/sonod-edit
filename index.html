@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>উত্তরাধিকার সনদ - চর অষ্টধর ইউনিয়ন পরিষদ</title>
-        <!-- বাংলা ফন্টগুলোর জন্য অনলাইন লিংক (Google Fonts & CDN) -->
+        <title> সনদ </title>
+        <!-- বাংলা ফন্টগুলোর জন্য অনলাইন লিংক -->
         <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600&family=Hind+Siliguri:wght@400;600&family=Tiro+Bangla:ital@0;1&family=Noto+Serif+Bengali:wght@400;600&family=Baloo+Da+2:wght@400;600&family=Mina:wght@400;700&family=Galada&display=swap" rel="stylesheet">
           <style>
         /* ফন্ট স্টাইল ক্লাসসমূহ */
@@ -32,59 +32,107 @@
             padding: 5px;
         }
 
-        /* ওপরের টপ বার এবং বাটনগুলো ডান দিকে সাজানোর জন্য */
+        /* ডার্ক থিমযুক্ত টপ বার */
         .top-bar-wrapper {
-            display: flex;
-            justify-content: flex-end; /* ডান দিকে পুশ করার জন্য */
-            align-items: center;
-            background: #333;
-            padding: 10px 15px;
-            border-radius: 6px;
+            background: #2d3748;
+            padding: 12px;
+            border-radius: 8px;
             margin-bottom: 12px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             max-width: 210mm;
             margin-left: auto;
             margin-right: auto;
             box-sizing: border-box;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
             gap: 10px;
-            flex-wrap: wrap; /* ছোট স্ক্রিনে নিচে নেমে যাওয়ার বদলে ফ্লেক্স র্যাপ করবে */
+            align-items: center;
         }
 
-        .controls {
+        /* প্রাথমিক এডিট ও প্রিন্ট বাটন কন্ট্রোল */
+        .initial-edit-box {
             display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
         }
-        .controls button {
-            background: #0b6b3a;
+        .edit-trigger-btn {
+            background: #2b6cb0;
             color: white;
             border: none;
-            padding: 6px 12px;
+            padding: 8px 16px;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        /* এডিট মোড প্যানেল */
+        .editor-panel {
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            align-items: center;
+        }
+        body.edit-mode .editor-panel {
+            display: flex;
+        }
+        body.edit-mode .initial-edit-box {
+            display: none;
+        }
+
+        .tool-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tool-group {
+            background: #3a4a5e;
+            padding: 4px 8px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid #4a5d73;
             font-size: 13px;
+        }
+
+        .btn-ui {
+            background: #ebf8ff;
+            color: #2b6cb0;
+            border: 1px solid #3182ce;
+            padding: 5px 10px;
+            font-size: 13px;
+            font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
             white-space: nowrap;
         }
-        .controls button.save-btn, .controls button.reset-btn {
-            display: none;
+        .btn-ui:hover {
+            background: #bwebff;
         }
-        body.edit-mode .controls button.edit-trigger-btn {
-            display: none;
-        }
-        body.edit-mode .controls button.save-btn,
-        body.edit-mode .controls button.reset-btn {
-            display: inline-block;
-        }
-        .controls button.reset-btn {
-            background: #d9534f;
+
+        .btn-fmt {
+            background: #fff;
+            color: #1a202c;
+            border: 1px solid #cbd5e0;
+            padding: 4px 10px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
         }
 
         .font-selector-box select {
             background: #fff;
-            color: #333;
-            border: none;
-            padding: 6px 10px;
+            color: #1a202c;
+            border: 1px solid #cbd5e0;
+            padding: 5px 8px;
             font-size: 13px;
             font-weight: bold;
             cursor: pointer;
@@ -92,29 +140,26 @@
             outline: none;
         }
 
-        .format-toolbar {
-            display: none;
-            gap: 5px;
-            align-items: center;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-        body.edit-mode .format-toolbar {
-            display: flex;
-        }
-        .format-toolbar button {
-            background: #fff;
-            color: #333;
+        /* রিসেট ও প্রিন্ট বাটন */
+        .btn-reset-action {
+            background: #e53e3e;
+            color: white;
             border: none;
-            padding: 5px 8px;
-            font-size: 12px;
+            padding: 6px 16px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
-            white-space: nowrap;
         }
-        .format-toolbar button:hover {
-            background: #ddd;
+        .btn-print-action {
+            background: #38a169;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
         }
 
         .container {
@@ -156,7 +201,7 @@
             font-size: 10px;
             background: #f0f0f0;
             text-align: center;
-            border: 1px solid #ccc;
+            border: 1px solid #000;
         }
         .header-center {
             text-align: center;
@@ -199,24 +244,25 @@
             margin-bottom: 8px;
         }
 
+        /* টেবিল স্টাইল - পিডিএফে বর্ডার দৃশ্যমান রাখার জন্য ফিক্সড ফর্মেট */
         table {
             width: 100% !important;
-            table-layout: auto;
-            border-collapse: collapse;
-            font-size: 12px;
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
             margin: 6px 0;
-        }
-        table, th, td {
-            border: 1px solid #000;
+            border-top: 2px solid #000000 !important;
+            border-left: 2px solid #000000 !important;
         }
         th, td {
+            border-right: 2px solid #000000 !important;
+            border-bottom: 2px solid #000000 !important;
             padding: 4px 5px;
             text-align: center;
             white-space: nowrap; 
+            box-sizing: border-box !important;
         }
         th {
             background-color: #fff;
-            font-size: 13px;
             position: relative;
         }
 
@@ -369,64 +415,102 @@
         .btn-submit { background: #28a745; color: white; }
         .btn-cancel { background: #dc3545; color: white; }
 
+        /* প্রিন্ট ও পিডিএফ এক্সপোর্টের জন্য স্টাইল */
         @media print {
             .top-bar-wrapper, .action-cell, .table-controls, .del-btn, .del-col-btn, .add-row-btn, .modal-overlay {
                 display: none !important;
             }
             body {
-                background: #fff;
-                padding: 0;
+                background: #fff !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             .container {
-                box-shadow: none;
-                padding: 8mm 10mm;
+                box-shadow: none !important;
+                padding: 8mm 10mm !important;
                 border: 3px double #000 !important;
-                height: 297mm;
+                height: 297mm !important;
+            }
+            /* প্রিন্ট ইঞ্জিনে বর্ডার অক্ষুণ্ণ রাখার ফিক্স */
+            table {
+                border-collapse: separate !important;
+                border-spacing: 0 !important;
+                width: 100% !important;
+                border-top: 2px solid #000000 !important;
+                border-left: 2px solid #000000 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            th, td {
+                border-right: 2px solid #000000 !important;
+                border-bottom: 2px solid #000000 !important;
+                color: #000 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
         }
     </style>
         </head>
         <body class="font-solaiman">
           <div class="top-bar-wrapper">
-            <!-- ফন্ট পরিবর্তনের ড্রপডাউন -->
-            <div class="font-selector-box">
-              <select id="fontSelector" onchange="changeGlobalFont(this.value)">
-                <option value="font-solaiman">সলাইমানলিপি</option>
-                <option value="font-nikosh">নিকোষ</option>
-                <option value="font-kalpurush">কালপুরুষ</option>
-                <option value="font-siyam">সিয়াম রূপালী</option>
-                <option value="font-anek">অনেক বাংলা</option>
-                <option value="font-SolaimanLipiClassic">ক্লাসিক বাংলা</option>
-                <option value="font-noto-serif">নোটো সেরিফ</option>
-                <option value="font-hind">হিন্দ সিলিগুড়ি</option>
-                <option value="font-baloo">বালু দা ২</option>
-                <option value="font-mina">মিনা</option>
-                <option value="font-adorsho">আদর্শ লিপি</option>
-                <option value="font-mukti">মুক্তি ফন্ট</option>
-                <option value="font-sutonnymj">সুতর্নিক এমজে</option>
-                <option value="font-gitanjali">গীতাঞ্জলি</option>
-                <option value="font-meghna">মেঘনা</option>
-                <option value="font-rupali">রূপালী</option>
-              </select>
+            <div class="initial-edit-box">
+              <button class="edit-trigger-btn" onclick="openPasswordModal()">🔐 এডিট মোড অন করুন</button>
+              <button class="btn-print-action" onclick="window.print()">🖨 প্রিন্ট করুন</button>
             </div>
-            <div class="format-toolbar">
-              <button onclick="formatText('bold')" title="বোল্ড করুন">
-                <b>B</b>
-              </button>
-              <button onclick="formatText('italic')" title="বাঁকা করুন">
-                <i>I</i>
-              </button>
-              <button onclick="formatText('undo')" title="আনডু">↩️</button>
-              <button onclick="changeFontSize('increase')" title="লেখা বড়">A+</button>
-              <button onclick="changeFontSize('decrease')" title="লেখা ছোট">A-</button>
-              <button onclick="adjustGlobalSize('increase')" title="জুম ইন">+</button>
-              <button onclick="adjustGlobalSize('decrease')" title="জুম আউট">-</button>
-            </div>
-            <div class="controls">
-              <button class="edit-trigger-btn" onclick="openPasswordModal()">🔐 এডিট</button>
-              <button class="save-btn" onclick="saveChanges()">💾 সেভ</button>
-              <button class="reset-btn" onclick="resetToDefault()">🔄 রিসেট</button>
-              <button onclick="window.print()">🖨️ প্রিন্ট</button>
+            <div class="editor-panel">
+              <div class="tool-row">
+                <div class="tool-group">
+                  <span>পেজ:</span>
+                  <button class="btn-ui" onclick="setGlobalZoom(0.9)">A- (-১০%)</button>
+                  <button class="btn-ui" onclick="setGlobalZoom(1.0)">A (১০০%)</button>
+                  <button class="btn-ui" onclick="setGlobalZoom(1.1)">A+ (+১০%)</button>
+                </div>
+                <div class="tool-group">
+                  <button class="btn-fmt" onclick="formatText('bold')">B</button>
+                  <button class="btn-fmt" onclick="formatText('italic')">
+                    <i>I</i>
+                  </button>
+                </div>
+              </div>
+              <div class="tool-row">
+                <div class="font-selector-box">
+                  <select id="fontSelector" onchange="changeGlobalFont(this.value)">
+                    <option value="font-solaiman">সলাইমানলিপি</option>
+                    <option value="font-nikosh">নিকোষ</option>
+                    <option value="font-kalpurush" selected>কালপুরুষ</option>
+                    <option value="font-siyam">সিয়াম রূপালী</option>
+                    <option value="font-anek">অনেক বাংলা</option>
+                    <option value="font-SolaimanLipiClassic">ক্লাসিক বাংলা</option>
+                    <option value="font-noto-serif">নোটো সেরিফ</option>
+                    <option value="font-hind">হিন্দ সিলিগুড়ি</option>
+                    <option value="font-baloo">বালু দা ২</option>
+                    <option value="font-mina">মিনা</option>
+                    <option value="font-adorsho">আদর্শ লিপি</option>
+                    <option value="font-mukti">মুক্তি ফন্ট</option>
+                    <option value="font-sutonnymj">সুতর্নিক এমজে</option>
+                    <option value="font-gitanjali">গীতাঞ্জলি</option>
+                    <option value="font-meghna">মেঘনা</option>
+                    <option value="font-rupali">রূপালী</option>
+                  </select>
+                </div>
+                <div class="tool-group">
+                  <span>ফন্ট সাইজ:</span>
+                  <button class="btn-fmt" onclick="changeFontSize('increase')">A+</button>
+                  <button class="btn-fmt" onclick="changeFontSize('decrease')">A-</button>
+                </div>
+                <div class="tool-group">
+                  <span>লাইন ফাঁকা:</span>
+                  <button class="btn-fmt" onclick="adjustLineHeight('increase')">+</button>
+                  <button class="btn-fmt" onclick="adjustLineHeight('decrease')">-</button>
+                </div>
+              </div>
+              <div class="tool-row">
+                <button class="btn-reset-action" onclick="resetToDefault()">রিসেট</button>
+                <button class="btn-print-action" style="background:#2b6cb0;" onclick="saveChanges()">💾 সেভ করুন</button>
+                <button class="btn-print-action" onclick="window.print()">🖨️ প্রিন্ট করুন</button>
+              </div>
             </div>
           </div>
           <div class="modal-overlay" id="passwordModal">
@@ -444,12 +528,12 @@
                     <div style="width: 45px;">
                     </div>
                     <div class="header-center">
-                      <div class="top-center-logo editable-field" contenteditable="false">লোগো</div>
+                      <div class="top-center-logo editable-field" contenteditable="false">A</div>
                       <h2>
                         <span class="editable-field" contenteditable="false">নকলা, পৌরসভা</span>
                       </h2>
                       <p>
-                        <span class="editable-field" contenteditable="false">শেরপুর, বাংলাদেশ।</span>
+                        <span class="editable-field" contenteditable="false">শেরপুর,বাংলাদেশ।</span>
                       </p>
                     </div>
                     <div style="width: 45px;">
@@ -466,7 +550,7 @@
                   <div class="editable-field" contenteditable="false">ইস্যু তারিখ:- <span class="editable-field" contenteditable="false">২৫ ই ফেব্রুয়ারি ২০২৬</span>
                 </div>
               </div>
-              <div class="body-text editable-field" contenteditable="false">
+              <div class="body-text editable-field" contenteditable="false" id="main-body-text">
                 এই মর্মে প্রত্যয়ন করা যাইতেছে যে, মৃত আছিয়া বেগম, পিতা/স্বামী: মোঃ সহিদুল ইসলাম, মাতা: মৃত রয়মান নেছা, অত্র এলাকার একজন স্থায়ী বাসিন্দা। তাহার স্থায়ী ঠিকানাঃ- গ্রাম/বাড়ীঃ বাজারদী, ডাকঘরঃ নকলা- ২১৫০, ওয়ার্ড নম্বরঃ ৫, নকলা পৌরসভা, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। বর্তমান ঠিকানাঃ- গ্রাম/বাড়ীঃ দধিয়ার চর, ডাকঘরঃ কাজীকাইটা - ২১৫০, ওয়ার্ড নম্বরঃ ২, চর অষ্টধর ইউনিয়ন, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। প্রদানকৃত নথি ও সাক্ষীর সাক্ষ্য অনুযায়ী, মৃত্যুকালে তিনি তাহার নিম্ন বর্ণিত উত্তরাধিকারগণ রাখিয়া মৃত্যুবরণ করিয়াছেন।
               </div>
               <div class="table-controls">
@@ -493,9 +577,9 @@
     <tbody id="heir-tbody">
       <tr>
         <td class="editable-field" contenteditable="false">১</td>
-        <td class="editable-field" contenteditable="false">মাছুদা আক্তার লেমন</td>
-        <td class="editable-field" contenteditable="false">০১-০২-১৯৬৬</td>
-        <td class="editable-field" contenteditable="false">৬১</td>
+        <td class="editable-field" contenteditable="false">মোছাঃ আয়শা সিদ্দিকা সপ্ন</td>
+        <td class="editable-field" contenteditable="false">০২-০২-২০০২</td>
+        <td class="editable-field" contenteditable="false">২৪</td>
         <td class="editable-field" contenteditable="false">কন্যা</td>
         <td class="editable-field" contenteditable="false">--</td>
         <td class="action-cell">
@@ -504,10 +588,10 @@
       </tr>
       <tr>
         <td class="editable-field" contenteditable="false">২</td>
-        <td class="editable-field" contenteditable="false">মোঃ সহিদুল ইসলাম</td>
-        <td class="editable-field" contenteditable="false">০৭-০৭-১৯৬৯</td>
-        <td class="editable-field" contenteditable="false">৫৭</td>
-        <td class="editable-field" contenteditable="false">স্বামী</td>
+        <td class="editable-field" contenteditable="false">মোছাঃ আলিয়া পারভীন মেঘ</td>
+        <td class="editable-field" contenteditable="false">০১-০১-২০০১</td>
+        <td class="editable-field" contenteditable="false">২৫</td>
+        <td class="editable-field" contenteditable="false">কন্যা</td>
         <td class="editable-field" contenteditable="false">--</td>
         <td class="action-cell">
           <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
@@ -537,7 +621,7 @@
         <br>
           প্রশাসক<br>
           নকল,পৌরসভা<br>
-          শেরপুর, বাংলাদেশ।
+          শেরপুর,বাংলাদেশ।
         </span>
       </div>
     </div>
@@ -624,7 +708,7 @@
     function changeFontSize(action) {
         let selection = window.getSelection();
         if (!selection.rangeCount || selection.isCollapsed) {
-            alert("দয়া করে প্রথমে যে লেখাটি ছোট বা বড় করতে চান তা সিলেক্ট করুন।");
+            alert("দয়া করে বড় ছোট করতে আগে মার্ক করুন।");
             return;
         }
         
@@ -656,22 +740,48 @@
         selection.addRange(newRange);
     }
 
-    function adjustGlobalSize(action) {
+    function setGlobalZoom(scaleValue) {
         let container = document.getElementById('receipt-container');
-        let currentZoom = parseFloat(container.style.zoom) || 1;
-        let newZoom = currentZoom;
+        container.style.zoom = scaleValue;
+        localStorage.setItem('certificate_global_scale', scaleValue);
+    }
 
-        if (action === 'increase') {
-            newZoom += 0.05;
-        } else if (action === 'decrease') {
-            newZoom -= 0.05;
+    function adjustLineHeight(action) {
+        let selection = window.getSelection();
+        let targetElement = null;
+
+        if (selection.rangeCount > 0) {
+            let containerElement = selection.getRangeAt(0).commonAncestorContainer;
+            if (containerElement.nodeType === 3) {
+                targetElement = containerElement.parentNode;
+            } else {
+                targetElement = containerElement;
+            }
         }
 
-        if (newZoom < 0.7) newZoom = 0.7;
-        if (newZoom > 1.4) newZoom = 1.4;
+        if (!targetElement || !targetElement.closest('.container')) {
+            targetElement = document.getElementById('main-body-text');
+        } else {
+            targetElement = targetElement.closest('.editable-field, p, div') || document.getElementById('main-body-text');
+        }
 
-        container.style.zoom = newZoom;
-        localStorage.setItem('certificate_global_scale', newZoom);
+        let computedStyle = window.getComputedStyle(targetElement);
+        let currentLineHeight = parseFloat(computedStyle.lineHeight);
+        let currentFontSize = parseFloat(computedStyle.fontSize);
+
+        let currentRatio = currentLineHeight / currentFontSize;
+
+        if (isNaN(currentRatio) || !isFinite(currentRatio)) {
+            currentRatio = 1.6;
+        }
+
+        if (action === 'increase') {
+            currentRatio += 0.1;
+        } else if (action === 'decrease') {
+            currentRatio = Math.max(0.8, currentRatio - 0.1);
+        }
+
+        targetElement.style.lineHeight = currentRatio.toFixed(2);
     }
 
     function addColumn() {
@@ -768,7 +878,7 @@
             document.getElementById('receipt-container').innerHTML = defaultTemplateHTML;
             document.getElementById('receipt-container').style.zoom = 1;
             document.body.className = 'font-solaiman';
-            document.getElementById('fontSelector').value = 'font-solaiman';
+            document.getElementById('fontSelector').value = 'font-kalpurush';
             alert("পেজটি আগের অবস্থায় ফিরিয়ে নেওয়া হয়েছে।");
         }
     }
