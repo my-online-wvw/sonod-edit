@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> সনদ </title>
+        <title>A—সনদ</title>
         <!-- বাংলা ফন্টগুলোর জন্য অনলাইন লিংক -->
         <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600&family=Hind+Siliguri:wght@400;600&family=Tiro+Bangla:ital@0;1&family=Noto+Serif+Bengali:wght@400;600&family=Baloo+Da+2:wght@400;600&family=Mina:wght@400;700&family=Galada&display=swap" rel="stylesheet">
           <style>
@@ -61,11 +61,54 @@
             background: #2b6cb0;
             color: white;
             border: none;
-            padding: 8px 16px;
-            font-size: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
             cursor: pointer;
             border-radius: 6px;
             font-weight: bold;
+        }
+
+
+        /* শুধু বাটনগুলোর জায়গা ঠিক করা: ডান পাশের খালি জায়গা ব্যবহার করে ২টি করে সারি */
+        .editor-panel {
+            width: 100%;
+        }
+
+        .editor-panel .tool-row {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            align-items: center;
+            justify-items: stretch;
+        }
+
+        .editor-panel .tool-group,
+        .editor-panel .font-selector-box,
+        .editor-panel .tool-row > button {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .editor-panel .tool-group {
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .edit-trigger-btn,
+        .btn-print-action,
+        .btn-ui,
+        .btn-fmt,
+        .btn-reset-action {
+            padding: 11px 17px;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+
+        .editor-panel .font-selector-box select {
+            width: 100%;
+            min-height: 44px;
+            font-size: 17px;
         }
 
         /* এডিট মোড প্যানেল */
@@ -83,9 +126,31 @@
             display: none;
         }
 
+        /* বাটনের সিরিয়াল: ১-৪ প্রথম সারি, ৫-৮ দ্বিতীয় সারি */
+        body.edit-mode .editor-panel {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+            width: 100%;
+            align-items: stretch;
+        }
+
+        body.edit-mode .editor-panel .tool-row {
+            display: contents;
+        }
+
+        body.edit-mode .editor-panel .tool-group,
+        body.edit-mode .editor-panel .font-selector-box,
+        body.edit-mode .editor-panel .tool-row > button {
+            width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            justify-content: center;
+        }
+
         .tool-row {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             align-items: center;
             flex-wrap: wrap;
             justify-content: center;
@@ -93,21 +158,21 @@
 
         .tool-group {
             background: #3a4a5e;
-            padding: 4px 8px;
+            padding: 6px 10px;
             border-radius: 6px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
             border: 1px solid #4a5d73;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .btn-ui {
             background: #ebf8ff;
             color: #2b6cb0;
             border: 1px solid #3182ce;
-            padding: 5px 10px;
-            font-size: 13px;
+            padding: 6px 12px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
@@ -121,8 +186,8 @@
             background: #fff;
             color: #1a202c;
             border: 1px solid #cbd5e0;
-            padding: 4px 10px;
-            font-size: 14px;
+            padding: 6px 12px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
@@ -132,8 +197,8 @@
             background: #fff;
             color: #1a202c;
             border: 1px solid #cbd5e0;
-            padding: 5px 8px;
-            font-size: 13px;
+            padding: 6px 10px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
@@ -145,8 +210,8 @@
             background: #e53e3e;
             color: white;
             border: none;
-            padding: 6px 16px;
-            font-size: 14px;
+            padding: 8px 18px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 4px;
@@ -155,8 +220,8 @@
             background: #38a169;
             color: white;
             border: none;
-            padding: 8px 16px;
-            font-size: 15px;
+            padding: 10px 20px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 6px;
@@ -198,7 +263,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 12px;
             background: #f0f0f0;
             text-align: center;
             border: 1px solid #000;
@@ -210,12 +275,12 @@
         }
         .header-center h2 {
             margin: 0;
-            font-size: 22px;
+            font-size: 24px;
             font-weight: bold;
         }
         .header-center p {
             margin: 3px 0;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .certificate-title-box {
@@ -225,7 +290,7 @@
         .certificate-title-box h3 {
             display: inline-block;
             margin: 0;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
             background: #fff;
         }
@@ -233,12 +298,12 @@
         .meta-info {
             display: flex;
             justify-content: space-between;
-            font-size: 14.5px;
+            font-size: 16.5px;
             margin-bottom: 8px;
             font-weight: bold;
         }
         .body-text {
-            font-size: 14.5px;
+            font-size: 16.5px;
             line-height: 1.6;
             text-align: justify;
             margin-bottom: 8px;
@@ -260,14 +325,16 @@
             text-align: center;
             white-space: nowrap; 
             box-sizing: border-box !important;
+            font-size: 16px;
         }
         th {
             background-color: #fff;
             position: relative;
+            font-size: 16.5px;
         }
 
         .notice-section {
-            font-size: 13.5px;
+            font-size: 15.5px;
             line-height: 1.55;
             margin-top: 6px;
             text-align: justify;
@@ -284,18 +351,18 @@
         }
         .sign-box {
             text-align: center;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1.5;
         }
         
         .qr-bottom {
-            width: 42px;
-            height: 42px;
+            width: 50px;
+            height: 50px;
             border: 1px solid #000;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 9px;
+            font-size: px;
             text-align: center;
             background: #fff;
             flex-shrink: 0;
@@ -308,7 +375,7 @@
         }
 
         .footer-verify {
-            font-size: 12px;
+            font-size: 14px;
             color: #333;
             display: inline-block;
         }
@@ -327,7 +394,7 @@
             color: white;
             border: none;
             padding: 1px 4px;
-            font-size: 9px;
+            font-size: 11px;
             cursor: pointer;
             border-radius: 3px;
             margin-left: 4px;
@@ -350,7 +417,7 @@
             color: white;
             border: none;
             padding: 4px 8px;
-            font-size: 11px;
+            font-size: 13px;
             cursor: pointer;
             border-radius: 3px;
             margin-right: 5px;
@@ -364,7 +431,7 @@
             padding: 4px 8px;
             cursor: pointer;
             border-radius: 3px;
-            font-size: 11.5px;
+            font-size: 13.5px;
         }
         body.edit-mode .add-row-btn {
             display: inline-block;
@@ -376,7 +443,7 @@
             padding: 2px 5px;
             cursor: pointer;
             border-radius: 3px;
-            font-size: 10px;
+            font-size: 12px;
         }
 
         .modal-overlay {
@@ -472,6 +539,8 @@
                   <button class="btn-fmt" onclick="formatText('italic')">
                     <i>I</i>
                   </button>
+                  <button class="btn-fmt" onclick="formatText('undo')" title="Undo">↩️</button>
+                  <button class="btn-fmt" onclick="formatText('redo')" title="Redo">↪️</button>
                 </div>
               </div>
               <div class="tool-row">
@@ -528,12 +597,12 @@
                     <div style="width: 45px;">
                     </div>
                     <div class="header-center">
-                      <div class="top-center-logo editable-field" contenteditable="false">A</div>
+                      <div class="top-center-logo editable-field" contenteditable="false">লোগো</div>
                       <h2>
                         <span class="editable-field" contenteditable="false">নকলা, পৌরসভা</span>
                       </h2>
                       <p>
-                        <span class="editable-field" contenteditable="false">শেরপুর,বাংলাদেশ।</span>
+                        <span class="editable-field" contenteditable="false">শেরপুর, বাংলাদেশ।</span>
                       </p>
                     </div>
                     <div style="width: 45px;">
@@ -547,11 +616,11 @@
                   <div class="meta-info">
                     <div class="editable-field" contenteditable="false">সনদ নং:- <span class="editable-field" contenteditable="false">২২০৬১৯৯৫২২৯</span>
                   </div>
-                  <div class="editable-field" contenteditable="false">ইস্যু তারিখ:- <span class="editable-field" contenteditable="false">২৫ ই ফেব্রুয়ারি ২০২৬</span>
+                  <div class="editable-field" contenteditable="false">ইস্যু তারিখ:- <span class="editable-field" contenteditable="false">১৫ ই মার্চ ২০২৫</span>
                 </div>
               </div>
               <div class="body-text editable-field" contenteditable="false" id="main-body-text">
-                এই মর্মে প্রত্যয়ন করা যাইতেছে যে, মৃত আছিয়া বেগম, পিতা/স্বামী: মোঃ সহিদুল ইসলাম, মাতা: মৃত রয়মান নেছা, অত্র এলাকার একজন স্থায়ী বাসিন্দা। তাহার স্থায়ী ঠিকানাঃ- গ্রাম/বাড়ীঃ বাজারদী, ডাকঘরঃ নকলা- ২১৫০, ওয়ার্ড নম্বরঃ ৫, নকলা পৌরসভা, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। বর্তমান ঠিকানাঃ- গ্রাম/বাড়ীঃ দধিয়ার চর, ডাকঘরঃ কাজীকাইটা - ২১৫০, ওয়ার্ড নম্বরঃ ২, চর অষ্টধর ইউনিয়ন, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। প্রদানকৃত নথি ও সাক্ষীর সাক্ষ্য অনুযায়ী, মৃত্যুকালে তিনি তাহার নিম্ন বর্ণিত উত্তরাধিকারগণ রাখিয়া মৃত্যুবরণ করিয়াছেন।
+                এই মর্মে প্রত্যয়ন করা যাইতেছে যে, মৃত আরিফিন আক্তার, পিতা/স্বামীঃ মোঃ রাকিবুল ইসলাম, মাতাঃ মৃত রয়মান নেছা, অত্র এলাকার একজন স্থায়ী বাসিন্দা। তাহার স্থায়ী ঠিকানাঃ- গ্রাম/বাড়ীঃ বাজারদী, ডাকঘরঃ নকলা- ২১৫০, ওয়ার্ড নম্বরঃ ৫, নকলা পৌরসভা, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। বর্তমান ঠিকানাঃ- গ্রাম/বাড়ীঃ বাজারদী, ডাকঘরঃ নকলা- ২১৫০, ওয়ার্ড নম্বরঃ ৫, নকলা পৌরসভা, থানা / উপজেলাঃ নকলা, জেলাঃ শেরপুর। প্রদানকৃত নথি ও সাক্ষীর সাক্ষ্য অনুযায়ী, মৃত্যুকালে তিনি তাহার নিম্ন বর্ণিত উত্তরাধিকারগণ রাখিয়া মৃত্যুবরণ করিয়াছেন।
               </div>
               <div class="table-controls">
                 <button onclick="addColumn()">➕ নতুন কলাম যোগ করুন</button>
@@ -577,9 +646,9 @@
     <tbody id="heir-tbody">
       <tr>
         <td class="editable-field" contenteditable="false">১</td>
-        <td class="editable-field" contenteditable="false">মোছাঃ আয়শা সিদ্দিকা সপ্ন</td>
-        <td class="editable-field" contenteditable="false">০২-০২-২০০২</td>
-        <td class="editable-field" contenteditable="false">২৪</td>
+        <td class="editable-field" contenteditable="false">মোছাঃ আলেয়া মুস্তাহান আলো</td>
+        <td class="editable-field" contenteditable="false">০১-০২-১৯৬৬</td>
+        <td class="editable-field" contenteditable="false">৬১</td>
         <td class="editable-field" contenteditable="false">কন্যা</td>
         <td class="editable-field" contenteditable="false">--</td>
         <td class="action-cell">
@@ -588,10 +657,10 @@
       </tr>
       <tr>
         <td class="editable-field" contenteditable="false">২</td>
-        <td class="editable-field" contenteditable="false">মোছাঃ আলিয়া পারভীন মেঘ</td>
-        <td class="editable-field" contenteditable="false">০১-০১-২০০১</td>
-        <td class="editable-field" contenteditable="false">২৫</td>
-        <td class="editable-field" contenteditable="false">কন্যা</td>
+        <td class="editable-field" contenteditable="false">মোঃ সহিদুল ইসলাম</td>
+        <td class="editable-field" contenteditable="false">০৭-০৭-১৯৬৯</td>
+        <td class="editable-field" contenteditable="false">৫৭</td>
+        <td class="editable-field" contenteditable="false">স্বামী</td>
         <td class="editable-field" contenteditable="false">--</td>
         <td class="action-cell">
           <button class="del-btn" onclick="deleteRow(this)">ডিলিট</button>
@@ -607,7 +676,7 @@
     আমি প্রয়াগতের আত্মার শান্তি ও উত্তরাধিকারীগণের মঙ্গল কামনা করিতেছি।
   </div>
   <div class="notice-section editable-field" contenteditable="false" style="margin-top: 5px;">
-    <b>বিঃদ্রঃ</b> আবেদনকারী যদি ইচ্ছাকৃতভাবে কোন উত্তরাধিকার বাদ দিয়ে থাকেন বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য চর অষ্টধর ইউনিয়ন পরিষদ কার্যালয় কোনভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল বলিয়া গণ্য হইবে।
+    <b>বিঃদ্রঃ</b> আবেদনকারী যদি ইচ্ছাকৃতভাবে কোন উত্তরাধিকার বাদ দিয়ে থাকেন বা কোন ভুল তথ্য প্রদান করিয়া থাকেন তাহলে তিনি দায়ী থাকিবেন। তাহার জন্য নকলা পৌরসভা কার্যালয় কোনভাবেই দায়ী থাকিবেন না এবং উক্ত সনদ বাতিল বলিয়া গণ্য হইবে।
   </div>
 </div>
 <div class="signature-area">
@@ -617,7 +686,7 @@
     </div>
     <div class="sign-box" style="width: 36%; text-align: right;">
       <span class="editable-field" contenteditable="false">
-        <b style="font-size: 14.5px;">মোঃ জাহাঙ্গীর আলম</b>
+        <b style="font-size: 16.5px;">দীব জন মিত্র</b>
         <br>
           প্রশাসক<br>
           নকল,পৌরসভা<br>
@@ -627,7 +696,7 @@
     </div>
     <div class="footer-bottom-container">
       <div class="footer-verify editable-field" contenteditable="false" id="footer-verify-box">
-        যাচাইকরণ: https://my-online-wvw.github.io/qov-sonod-veryfi/?code=22061995229
+        যাচাইকরণ: https://qr code online sonod veryfi/code no=220619952200
       </div>
     </div>
   </div>
@@ -708,7 +777,7 @@
     function changeFontSize(action) {
         let selection = window.getSelection();
         if (!selection.rangeCount || selection.isCollapsed) {
-            alert("দয়া করে বড় ছোট করতে আগে মার্ক করুন।");
+            alert("দয়া করে প্রথমে যে লেখাটি ছোট বা বড় করতে চান তা সিলেক্ট করুন।");
             return;
         }
         
@@ -719,7 +788,7 @@
         }
         
         let currentSize = parseFloat(window.getComputedStyle(containerElement).fontSize);
-        if (!currentSize || isNaN(currentSize)) currentSize = 14;
+        if (!currentSize || isNaN(currentSize)) currentSize = 16;
 
         let newSize = currentSize;
         if (action === 'increase') {
